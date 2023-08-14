@@ -60,9 +60,27 @@ Route::middleware(['auth:admin'])->group(function (){
 
 
     Route::get('/view/category',[\App\Http\Controllers\Backend\CategoryController::class,'viewCategory'])->name('admin.viewCategory');
+    Route::post('/store/category', [\App\Http\Controllers\Backend\CategoryController::class, 'storeCategory'])->name('store.category');
+    Route::get('/edit/category/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'editCategory'])->name('edit.category');
+    Route::post('/update/category/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'updateCategory'])->name('update.category');
+    Route::get('/delete/category/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'deleteCategory'])->name('delete.category');
+
     Route::get('/view/subcategory',[\App\Http\Controllers\Backend\CategoryController::class,'viewSubCategory'])->name('admin.viewSubCategory');
+    Route::post('/store/subcategory', [\App\Http\Controllers\Backend\CategoryController::class, 'storeSubcategory'])->name('store.subcategory');
+    Route::get('/edit/subcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'editSubcategory'])->name('edit.subcategory');
+    Route::post('/update/subcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'updateSubcategory'])->name('update.subcategory');
+    Route::get('/delete/subcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'deleteSubcategory'])->name('delete.subcategory');
+
+
     Route::get('/view/sub_subcategory',[\App\Http\Controllers\Backend\CategoryController::class,'viewSubSubCategory'])->name('admin.viewSubSubCategory');
 
+
+    Route::get('/view/product',[\App\Http\Controllers\Backend\ProductController::class,'viewProduct'])->name('admin.viewProduct');
+    Route::get('/edit/product/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'editProduct'])->name('edit.product');
+    Route::get('/delete/product/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'deleteProduct'])->name('delete.product');
+    Route::post('/update/product/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'updateProduct'])->name('update.product');
+    Route::get('/add/product', [\App\Http\Controllers\Backend\ProductController::class, 'addProduct'])->name('add.product');
+    Route::post('/store/product', [\App\Http\Controllers\Backend\ProductController::class, 'storeProduct'])->name('store.product');
 });
 
 

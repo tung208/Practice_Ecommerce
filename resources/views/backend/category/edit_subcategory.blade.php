@@ -14,51 +14,52 @@
 
 
 
-
-
-                <!--   ------------ Add Category Page -------- -->
+                <!--   ------------ Add SubCategory Page -------- -->
 
 
                 <div class="col-12">
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Edit Category </h3>
+                            <h3 class="box-title">Edit SubCategory </h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
 
 
-                                <form method="post" action="{{ route('update.category',$category->id) }}" >
+                                <form method="post" action="{{ route('update.subcategory',$sub_category->id) }}" >
                                     @csrf
 
-
+                                    <input type="hidden" name="id" value="{{ $sub_category->id }}">
 
                                     <div class="form-group">
-                                        <h5>Category Name  <span class="text-danger">*</span></h5>
+                                        <h5>Category Select <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text"  name="category_name_en" class="form-control" value="{{ $category->category_name_en }}" >
-                                            @error('category_name_en')
+                                            <select name="category_id" class="form-control"  >
+                                                <option value="" selected="" disabled="">Select Category</option>
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}" {{ $category->id == $sub_category->category_id ? 'selected': ''}} >{{ $category->category_name_en }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('category_id')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
 
 
-
                                     <div class="form-group">
-                                        <h5>Category Icon  <span class="text-danger">*</span></h5>
+                                        <h5>SubCategory Name <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="file" id="image" name="category_icon" class="form-control"  value="{{ $category->category_icon }}" >
-                                            @error('category_icon')
+                                            <input type="text" name="subcategory_name_en" class="form-control" value="{{ $sub_category->subcategory_name_en }}" >
+                                            @error('subcategory_name_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="controls">
-                                             <img id="showImage" src="{{(!empty($category-> category_icon))? url($category-> category_icon): url('upload/no_image.jpg')}}" style=" width: 100px; height: 100px;">
-                                        </div>
                                     </div>
+
+
 
 
                                     <div class="text-xs-right">

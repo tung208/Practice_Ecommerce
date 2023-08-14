@@ -47,7 +47,7 @@
                                     <div class="form-group">
                                         <h5>Slider Short Description <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="description" class="form-control" value="{{ $sliders->short_description }}" >
+                                            <input type="text" name="short_description" class="form-control" value="{{ $sliders->short_description }}" >
 
                                         </div>
                                     </div>

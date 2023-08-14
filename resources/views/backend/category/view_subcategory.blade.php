@@ -1,3 +1,4 @@
+
 @extends('backend.admin_master')
 @section('admin')
 
@@ -18,7 +19,7 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Category List <span class="badge badge-pill badge-danger"> {{ count($category) }} </span></h3>
+                            <h3 class="box-title">SubCategory List <span class="badge badge-pill badge-danger"> 1 </span> </h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -26,21 +27,22 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Category Icon </th>
-                                        <th>Category Name</th>
+                                        <th>Category </th>
+                                        <th>SubCategory</th>
                                         <th>Action</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($category as $item)
+                                    @foreach($subCategory as $item)
                                         <tr>
-                                            <td> <span>   <img id="showImage" src="{{(!empty($item-> category_icon))? url($item-> category_icon): url('upload/no_image.jpg')}}" style=" width: 64px; height: 64px;"></span>  </td>
-                                            <td>{{ $item->category_name_en }}</td>
+                                            <td> {{ $item['category']['category_name_en'] }}  </td>
+                                            <td>{{ $item->subcategory_name_en }}</td>
 
-                                            <td>
-                                                <a href="{{ route('edit.category',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
-                                                <a href="{{ route('delete.category',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
+                                            <td width="30%">
+                                                <a href="{{ route('edit.subcategory',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
+
+                                                <a href="{{ route('delete.subcategory',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
                                                     <i class="fa fa-trash"></i></a>
                                             </td>
 
@@ -67,43 +69,43 @@
 
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add Category </h3>
+                            <h3 class="box-title">Add SubCategory </h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
 
 
-                                <form method="post" action="{{ route('store.category') }}" enctype="multipart/form-data" >
+                                <form method="post" action="{{ route('store.subcategory') }}" >
                                     @csrf
 
+
                                     <div class="form-group">
-                                        <h5>Category Name <span class="text-danger">*</span></h5>
+                                        <h5>Category Select <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text"  name="category_name_en" class="form-control" >
-                                            @error('category_name_en')
+                                            <select name="category_id" class="form-control"  >
+                                                <option value="" selected="" disabled="">Select Category</option>
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->category_name_en }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('category_id')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
 
 
-
                                     <div class="form-group">
-                                        <h5>Category Icon  <span class="text-danger">*</span></h5>
+                                        <h5>SubCategory Name <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="file" id="image" name="category_icon" class="form-control" >
-                                            @error('category_icon')
+                                            <input type="text" name="subcategory_name_en" class="form-control" >
+                                            @error('subcategory_name_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                    </div>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <img id="showImage" style=" width: 100px; height: 100px;">
-                                        </div>
-                                    </div>
 
 
                                     <div class="text-xs-right">
@@ -131,6 +133,8 @@
         <!-- /.content -->
 
     </div>
+
+
 
 
 @endsection

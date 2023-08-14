@@ -35,7 +35,7 @@ class SliderController extends Controller
 
             Slider::findOrFail($slider_id)->update([
                 'title' => $request->title,
-                'short_description' => $request->description,
+                'short_description' => $request->short_description,
                 'description' => $request->description,
                 'slider_img' => $save_url,
             ]);
@@ -48,7 +48,7 @@ class SliderController extends Controller
 
             Slider::findOrFail($slider_id)->update([
                 'title' => $request->title,
-                'short_description' => $request->description,
+                'short_description' => $request->short_description,
                 'description' => $request->description,
             ]);
             $notification = array(
@@ -75,7 +75,7 @@ class SliderController extends Controller
         $save_url = 'upload/slider/' . $name_gen;
         Slider::insert([
             'title' => $request->title,
-            'short_description' => $request->description,
+            'short_description' => $request->short_description,
             'description' => $request->description,
             'slider_img' => $save_url,
         ]);

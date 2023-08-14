@@ -370,7 +370,7 @@
         <li class="treeview ">
           <a href="#">
             <i data-feather="file"></i>
-            <span>Admin Company Setting</span>
+            <span>Company Info Setting</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -398,7 +398,7 @@
           <li class="treeview ">
               <a href="#">
                   <i data-feather="file"></i>
-                  <span>Slider Setting</span>
+                  <span>Category Setting</span>
                   <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -407,6 +407,21 @@
                   <li class="{{ ($route == 'admin.viewCategory')? 'active':'' }}"><a href="{{ route('admin.viewCategory') }}"><i class="ti-more"></i>All Category</a></li>
                   <li class="{{ ($route == 'admin.viewSubCategory')? 'active':'' }}"><a href="{{ route('admin.viewSubCategory') }}"><i class="ti-more"></i>All SubCategory</a></li>
                   <li class="{{ ($route == 'admin.viewSubSubCategory')? 'active':'' }}"><a href="{{ route('admin.viewSubSubCategory') }}"><i class="ti-more"></i>All Sub->SubCategory</a></li>
+
+
+              </ul>
+          </li>
+          <li class="treeview ">
+              <a href="#">
+                  <i data-feather="file"></i>
+                  <span>Product Setting</span>
+                  <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                  <li class="{{ ($route == 'admin.viewProduct')? 'active':'' }}"><a href="{{ route('admin.viewProduct') }}"><i class="ti-more"></i>All Product</a></li>
+                  <li class="{{ ($route == 'add.product')? 'active':'' }}"><a href="{{ route('add.product') }}"><i class="ti-more"></i>Add Product</a></li>
 
 
               </ul>
