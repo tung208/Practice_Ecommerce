@@ -414,6 +414,21 @@
           <li class="treeview ">
               <a href="#">
                   <i data-feather="file"></i>
+                  <span>Brand Setting</span>
+                  <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                  <li class="{{ ($route == 'admin.viewCategory')? 'active':'' }}"><a href="{{ route('admin.viewBrand') }}"><i class="ti-more"></i>All Brand</a></li>
+
+
+
+              </ul>
+          </li>
+          <li class="treeview ">
+              <a href="#">
+                  <i data-feather="file"></i>
                   <span>Product Setting</span>
                   <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>

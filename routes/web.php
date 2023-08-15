@@ -71,8 +71,21 @@ Route::middleware(['auth:admin'])->group(function (){
     Route::post('/update/subcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'updateSubcategory'])->name('update.subcategory');
     Route::get('/delete/subcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'deleteSubcategory'])->name('delete.subcategory');
 
-
+    Route::get('/view/subsubcategory',[\App\Http\Controllers\Backend\CategoryController::class,'viewSubSubCategory'])->name('admin.viewSubSubCategory');
+    Route::post('/store/subsubcategory', [\App\Http\Controllers\Backend\CategoryController::class, 'storeSubSubcategory'])->name('store.subsubcategory');
+    Route::get('/edit/subsubcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'editSubSubcategory'])->name('edit.subsubcategory');
+    Route::post('/update/subsubcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'updateSubSubcategory'])->name('update.subsubcategory');
+    Route::get('/delete/subsubcategory/{id}',[\App\Http\Controllers\Backend\CategoryController::class,'deleteSubSubcategory'])->name('delete.subsubcategory');
+    Route::get('/category/subcategory/ajax/{category_id}',[\App\Http\Controllers\Backend\CategoryController::class,'getSubCategory']);
+    Route::get('/category/sub_subcategory/ajax/{subcategory_id}',[\App\Http\Controllers\Backend\CategoryController::class,'getSubSubCategory']);
     Route::get('/view/sub_subcategory',[\App\Http\Controllers\Backend\CategoryController::class,'viewSubSubCategory'])->name('admin.viewSubSubCategory');
+
+
+    Route::get('/view/brand',[\App\Http\Controllers\Backend\BrandController::class,'viewBrand'])->name('admin.viewBrand');
+    Route::post('/store/brand', [\App\Http\Controllers\Backend\BrandController::class, 'storeBrand'])->name('store.brand');
+    Route::get('/edit/brand/{id}',[\App\Http\Controllers\Backend\BrandController::class,'editBrand'])->name('edit.brand');
+    Route::post('/update/brand/{id}',[\App\Http\Controllers\Backend\BrandController::class,'updateBrand'])->name('update.brand');
+    Route::get('/delete/brand/{id}',[\App\Http\Controllers\Backend\BrandController::class,'deleteBrand'])->name('delete.brand');
 
 
     Route::get('/view/product',[\App\Http\Controllers\Backend\ProductController::class,'viewProduct'])->name('admin.viewProduct');

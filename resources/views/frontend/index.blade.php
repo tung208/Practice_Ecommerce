@@ -18,7 +18,7 @@
                 <div id="hero">
                     <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
                         @foreach($sliders as $slider)
-                        <div class="item" style="background-image: url({{$slider-> slider_img}});">
+                        <div class="item" style="background-image: url({{$slider-> slider_img}}); float: right; width: 900px  ">
                             <div class="container-fluid">
                                 <div class="caption bg-color vertical-center text-left">
                                     <div class="slider-header fadeInDown-1">{{$slider-> short_description}}</div>

@@ -1507,9 +1507,9 @@ header {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
-    margin: 8px 0 0;
+    margin: 20px 0 0;
     background: #fff;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 .main-header .top-search-holder .search-area .search-field {
@@ -1575,7 +1575,7 @@ header {
     display: inline-block;
     float: right;
     margin: 0px;
-    padding: 12px 19px 12px;
+    padding: 13px 22px 13px 22px;
     text-align: center;
     background-color: #F25C05;
     border: 1px solid #e0bc27;
