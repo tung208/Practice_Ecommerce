@@ -94,6 +94,15 @@ Route::middleware(['auth:admin'])->group(function (){
     Route::post('/update/product/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'updateProduct'])->name('update.product');
     Route::get('/add/product', [\App\Http\Controllers\Backend\ProductController::class, 'addProduct'])->name('add.product');
     Route::post('/store/product', [\App\Http\Controllers\Backend\ProductController::class, 'storeProduct'])->name('store.product');
+
+    Route::post('/update/product/image/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'updateProductImage'])->name('update.product.image');
+    Route::post('/update/product/thumbnail/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'updateProductThumbnail'])->name('update.product.thumbnail');
+    Route::get('/multi_img/delete/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'MultiImageDelete'])->name('product.multi_img.delete');
+
+
+
+    Route::get('product/inactive/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'ProductInactive'])->name('product.inactive');
+    Route::get('product/active/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'ProductActive'])->name('product.active');
 });
 
 

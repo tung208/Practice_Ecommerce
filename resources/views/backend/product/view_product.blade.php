@@ -27,7 +27,7 @@
                                     <thead>
                                     <tr>
                                         <th>Image </th>
-                                        <th>Product En</th>
+                                        <th>Product Name</th>
                                         <th>Product Price </th>
                                         <th>Quantity </th>
                                         <th>Discount </th>
@@ -39,10 +39,10 @@
                                     <tbody>
                                     @foreach($products as $item)
                                         <tr>
-                                            <td> <img src="{{ asset($item->product_thambnail) }}" style="width: 60px; height: 50px;">  </td>
+                                            <td> <img src="{{ asset($item->product_thumbnail) }}" style="width: 60px; height: 50px;">  </td>
                                             <td>{{ $item->product_name_en }}</td>
                                             <td>{{ $item->selling_price }} $</td>
-                                            <td>{{ $item->product_qty }} Pic</td>
+                                            <td>{{ $item->product_qty }} </td>
 
                                             <td>
                                                 @if($item->discount_price == NULL)
