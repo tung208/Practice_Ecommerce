@@ -173,17 +173,14 @@ class ProductController extends Controller
 
     public function updateProductImage(Request $request)
     {
-        $product_id = $request->product_id;
         $multi_image = $request->multi_img;
-        foreach ($multi_image as $img) {
-            $multi_id=$img-> id;
-            $unlink_img = MultiImg::findOrFail($multi_id);
-            unlink($unlink_img->photo_name);
+        foreach ($multi_image as $id => $img) {
+        $imgDel = MultiImg::findOrFail($id);
+            unlink($imgDel->photo_name);
             $name_gen = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
             Image:: make($img)->resize(917, 1000)->save('upload/products/multi_image/' . $name_gen);
             $save_url = 'upload/products/multi_image/' . $name_gen;
-            $multi = MultiImg::where('product_id', $product_id)->get();
-            $multi->where('id', $img->id)->update([
+            MultiImg::where('id',$id) ->update([
                 'photo_name' => $save_url,
                 'updated_at' => Carbon::now(),
             ]);
@@ -217,23 +214,61 @@ class ProductController extends Controller
 
     }
 
-    public function MultiImageDelete()
+    public function MultiImageDelete($id)
     {
+        $old_image = MultiImg::findOrFail($id);
+        unlink($old_image -> photo_name);
+        MultiImg::findOrFail($id) -> delete();
+
+        $noti = array(
+            'message' => 'Product Image Deleted',
+            'alert-type' => 'success'
+        );
+        return redirect()-> back()-> with($noti);
 
     }
 
     public function deleteProduct($id)
     {
+       $product=  Product::findOrFail($id);
+       unlink($product-> product_thumbnail);
+       $multi_img= MultiImg::where('product_id', $id) -> get();
+       foreach ($multi_img as $img){
+           unlink($img-> photo_name);
+           MultiImg::findOrFail($img-> id)-> delete();
+       }
+        $product-> delete();
+        $notification = array(
+            'message' => 'Product Deleted Successfully',
+            'alert-type' => 'success'
+        );
 
+        return redirect()->back()->with($notification);
     }
 
     public function ProductInactive($id)
     {
+        Product::findOrFail($id)-> update([
+            'status' => 0
+        ]);
+        $notification = array(
+            'message' => 'Product Active',
+            'alert-type' => 'success'
+        );
 
+        return redirect()->back()->with($notification);
     }
 
     public function ProductActive($id)
     {
+        Product::findOrFail($id)-> update([
+            'status' => 1
+        ]);
+        $notification = array(
+            'message' => 'Product Active',
+            'alert-type' => 'success'
+        );
 
+        return redirect()->back()->with($notification);
     }
 }

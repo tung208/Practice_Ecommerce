@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
+use App\Policies\CategoryPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Gate;
 use Image;
 
 class CategoryController extends Controller
@@ -95,6 +97,15 @@ class CategoryController extends Controller
 
     public function deleteCategory($id)
     {
+        $cate = Category::findOrFail($id);
+//        $response = Gate::inspect('delete', $cate);
+//        dd($response);
+//        if ($response->allowed()) {
+//
+//        } else {
+//
+//        }
+
         SubSubCategory::where('category_id', $id)->delete();
         SubCategory::where('category_id', $id)->delete();
         Category::findOrFail($id)->delete();
@@ -125,7 +136,7 @@ class CategoryController extends Controller
             'category_id' => $request->category_id,
             'subcategory_name_en' => $request->subcategory_name_en,
             'subcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subcategory_name_en)),
-            'created_at' =>Carbon::now(),
+            'created_at' => Carbon::now(),
         ]);
         $notification = array(
             'message' => 'SubCategory Inserted Successfully',
@@ -188,6 +199,7 @@ class CategoryController extends Controller
         $subcat = SubCategory::where('category_id', $category_id)->orderBy('subcategory_name_en', 'ASC')->get();
         return json_encode($subcat);
     }
+
     public function getSubSubCategory($subcategory_id)
     {
         $sub_subcat = SubSubCategory::where('subcategory_id', $subcategory_id)->orderBy('subsubcategory_name_en', 'ASC')->get();
@@ -210,7 +222,7 @@ class CategoryController extends Controller
             'subcategory_id' => $request->subcategory_id,
             'subsubcategory_name_en' => $request->subsubcategory_name_en,
             'subsubcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subsubcategory_slug_en)),
-            'created_at' =>Carbon::now(),
+            'created_at' => Carbon::now(),
         ]);
         $noti = array(
             'message' => 'Add sub sub category success',

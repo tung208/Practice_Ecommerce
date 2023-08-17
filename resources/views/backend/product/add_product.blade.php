@@ -78,10 +78,9 @@
                                                     <h5>SubCategory Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subcategory_id" class="form-control" required="">
-                                                            <option value="" selected="" disabled="">Select
+                                                            <option value="0" selected="" disabled="">Select
                                                                 SubCategory
                                                             </option>
-
                                                         </select>
                                                         @error('subcategory_id')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -101,8 +100,8 @@
                                                     <h5>SubSubCategory Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="subsubcategory_id" class="form-control"
-                                                                required="">
-                                                            <option value="" selected="" disabled="">Select
+                                                                required="" default="">
+                                                            <option value="0" selected disabled="">Select
                                                                 SubSubCategory
                                                             </option>
 
@@ -172,7 +171,7 @@
                                                     <h5>Product Tags <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_en" class="form-control"
-                                                               value="Lorem,Ipsum,Amet" data-role="tagsinput"
+                                                               value="Apple,Samsung" data-role="tagsinput"
                                                                required="">
                                                         @error('product_tags_en')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -194,7 +193,7 @@
                                                     <h5>Product Size <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_size_en" class="form-control"
-                                                               value="Small,Midium,Large" data-role="tagsinput"
+                                                               value="Small,Medium,Large" data-role="tagsinput"
                                                                required="">
                                                         @error('product_size_en')
                                                         <span class="text-danger">{{ $message }}</span>
@@ -212,10 +211,11 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>Product Color  <span class="text-danger">*</span></h5>
+                                                    <h5>Product Color <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_color_en" class="form-control"
-                                                               value="Red,Black,Yellow" data-role="tagsinput" required="">
+                                                               value="Red,Black,Yellow" data-role="tagsinput"
+                                                               required="">
                                                         @error('product_color_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -379,18 +379,18 @@
                                         </div>
 
 
-                                       {{-- <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
 
-                                            <div class="form-group">
-                                                <h5>Digital Product <span class="text-danger">pdf,xlx,csv*</span></h5>
-                                                <div class="controls">
-                                                    <input type="file" name="file" class="form-control">
+                                             <div class="form-group">
+                                                 <h5>Digital Product <span class="text-danger">pdf,xlx,csv*</span></h5>
+                                                 <div class="controls">
+                                                     <input type="file" name="file" class="form-control">
 
-                                                </div>
-                                            </div>
+                                                 </div>
+                                             </div>
 
 
-                                        </div> <!-- end col md 4 -->--}}
+                                         </div> <!-- end col md 4 -->--}}
 
 
                                         <div class="text-xs-right">
@@ -417,47 +417,32 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-           $('select[name="category_id"]').on('change',function () {
-               var category_id = $(this).val();
-               if(category_id){
-                   $.ajax({
-                       url : "{{url('/category/subcategory/ajax')}}/" + category_id,
-                       type: 'GET',
-                       dataType: 'json',
-                       success: function (data) {
-                           $('select[name="subsubcategory_id"]').html('');
-                           var d = $('select[name="subcategory_id"]').empty();
-                           $.each(data,function (key,value) {
-                               $('select[name="subcategory_id"]').append('<option value="'+ value.id+'">' + value.subcategory_name_en+ '</option>')
+            $('select[name="category_id"]').on('change', function () {
+                var category_id = $(this).val();
+                if (category_id) {
+                    $.ajax({
+                        url: "{{url('/category/subcategory/ajax')}}/" + category_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            $('select[name="subsubcategory_id"]').html('');
+                            var d = $('select[name="subcategory_id"]').empty();
+                            if (data.length == 0) {
+                                $('select[name="subcategory_id"]').append('<option value="0">No SubCategory</option>')
+                                $('select[name = "subsubcategory_id"]').append('<option value="0">No Sub_SubCategory</option>');
+                            } else {
+                                $.each(data, function (key, value) {
+                                    $('select[name="subcategory_id"]').append('<option value="' + value.id + '">' + value.subcategory_name_en + '</option>')
 
-                           });
-                       },
-                   });
-               }else {
-                   alert('danger');
-               }
-           });
-           $('select[name="subcategory_id"]').on('change',function (){
-               var subcategory_id = $(this).val();
-               if(subcategory_id){
-                   $.ajax({
-                       url : "{{url('/category/sub_subcategory/ajax')}}/"+ subcategory_id,
-                       type: 'GET',
-                       dataType : 'json',
-                       success: function (data) {
-                           var d = $('select[name= "subsubcategory_id"]').empty();
-                           $.each(data,function (key,value) {
-                               $('select[name = "subsubcategory_id"]').append('<option value="'+ value.id + '">' + value.subsubcategory_name_en + '</option>');
+                                });
+                            }
+                        },
+                    });
 
-                           });
-
-                       }
-                   });
-               }else {
-                   alert('danger');
-               }
-           });
-
+                } else {
+                    alert('danger');
+                }
+            });
 
 
         });
@@ -466,27 +451,58 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#multiImg').on('change',function (){
-               if(window.File && window.FileReader && window.FileList && window.Blob){
-                   var data = $(this)[0].files;
+            $('select[name="subcategory_id"]').on('change', function () {
+                var subcategory_id = $(this).val();
+                if (subcategory_id) {
+                    $.ajax({
+                        url: "{{url('/category/sub_subcategory/ajax')}}/" + subcategory_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            var d = $('select[name= "subsubcategory_id"]').empty();
+                            if (data.length == 0) {
+                                $('select[name = "subsubcategory_id"]').append('<option value="0">No Sub_SubCategory</option>')
+                            } else {
+                                $.each(data, function (key, value) {
+                                    $('select[name = "subsubcategory_id"]').append('<option value="' + value.id + '">' + value.subsubcategory_name_en + '</option>');
 
-                   $.each(data, function (index,file) {
-                       if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){
-                           var fRead = new FileReader();
-                           fRead.onload= (function (file) {
-                               return function (e) {
-                                   var img = $('<img/>').addClass('thumb').attr('src',e.target.result).width(80).height(80);
-                                   $('#preview_img').append(img);
-                               };
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    alert('danger');
+                }
+            });
 
-                           })(file);
-                           fRead.readAsDataURL(file);
-                       }
 
-                   });
-               }else {
-                   alert("Your browser doesn't support File Api")
-               }
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#multiImg').on('change', function () {
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    var data = $(this)[0].files;
+
+                    $.each(data, function (index, file) {
+                        if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) {
+                            var fRead = new FileReader();
+                            fRead.onload = (function (file) {
+                                return function (e) {
+                                    var img = $('<img/>').addClass('thumb').attr('src', e.target.result).width(80).height(80);
+                                    $('#preview_img').append(img);
+                                };
+
+                            })(file);
+                            fRead.readAsDataURL(file);
+                        }
+
+                    });
+                } else {
+                    alert("Your browser doesn't support File Api")
+                }
             });
 
         });
@@ -494,11 +510,11 @@
     </script>
 
     <script type="text/javascript">
-        function mainThumUrl(input){
+        function mainThumUrl(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#mainThmb').attr('src',e.target.result).width(80).height(80);
+                reader.onload = function (e) {
+                    $('#mainThmb').attr('src', e.target.result).width(80).height(80);
                 };
                 reader.readAsDataURL(input.files[0]);
             }

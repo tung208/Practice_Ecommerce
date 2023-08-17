@@ -169,7 +169,7 @@
                                             <div class="col-md-4">
 
                                                 <div class="form-group">
-                                                    <h5>Product Tags En <span class="text-danger">*</span></h5>
+                                                    <h5>Product Tags<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="text" name="product_tags_en" class="form-control" value="{{ $product->product_tags_en }}" data-role="tagsinput" required="">
                                                         @error('product_tags_en')
@@ -511,48 +511,57 @@
 
 
     <script type="text/javascript">
+
+
         $(document).ready(function () {
-            $('select[name="category_id"]').on('change',function () {
+            $('select[name="category_id"]').on('change', function () {
                 var category_id = $(this).val();
-                if(category_id){
+                if (category_id) {
                     $.ajax({
-                        url : "{{url('/category/subcategory/ajax')}}/" + category_id,
+                        url: "{{url('/category/subcategory/ajax')}}/" + category_id,
                         type: 'GET',
                         dataType: 'json',
                         success: function (data) {
                             $('select[name="subsubcategory_id"]').html('');
                             var d = $('select[name="subcategory_id"]').empty();
-                            $.each(data,function (key,value) {
-                                $('select[name="subcategory_id"]').append('<option value="'+ value.id+'">' + value.subcategory_name_en+ '</option>')
+                            if (data.length == 0) {
+                                $('select[name="subcategory_id"]').append('<option value="0">No SubCategory</option>')
+                                $('select[name = "subsubcategory_id"]').append('<option value="0">No Sub_SubCategory</option>');
+                            } else {
+                                $.each(data, function (key, value) {
+                                    $('select[name="subcategory_id"]').append('<option value="' + value.id + '">' + value.subcategory_name_en + '</option>')
 
-                            });
+                                });
+                            }
                         },
                     });
-                }else {
+                } else {
                     alert('danger');
                 }
             });
-            $('select[name="subcategory_id"]').on('change',function (){
+            $('select[name="subcategory_id"]').on('change', function () {
                 var subcategory_id = $(this).val();
-                if(subcategory_id){
+                if (subcategory_id) {
                     $.ajax({
-                        url : "{{url('/category/sub_subcategory/ajax')}}/"+ subcategory_id,
+                        url: "{{url('/category/sub_subcategory/ajax')}}/" + subcategory_id,
                         type: 'GET',
-                        dataType : 'json',
+                        dataType: 'json',
                         success: function (data) {
                             var d = $('select[name= "subsubcategory_id"]').empty();
-                            $.each(data,function (key,value) {
-                                $('select[name = "subsubcategory_id"]').append('<option value="'+ value.id + '">' + value.subsubcategory_name_en + '</option>');
+                            if (data.length == 0) {
+                                $('select[name = "subsubcategory_id"]').append('<option value="0">No Sub_SubCategory</option>')
+                            } else {
+                                $.each(data, function (key, value) {
+                                    $('select[name = "subsubcategory_id"]').append('<option value="' + value.id + '">' + value.subsubcategory_name_en + '</option>');
 
-                            });
-
+                                });
+                            }
                         }
                     });
-                }else {
+                } else {
                     alert('danger');
                 }
             });
-
 
 
         });

@@ -3528,15 +3528,16 @@ age-container #owl-main .owl-next {
 }
 
 .wide-banner .image img {
+    height: 300px;
     display: block;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    transition: all 0.7s ease;
 }
 
 .wide-banner:hover img {
-
+transform: scale(1.2);
 }
 
 .cnt-strip {

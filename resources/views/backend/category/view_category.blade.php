@@ -35,7 +35,7 @@
                                     <tbody>
                                     @foreach($category as $item)
                                         <tr>
-                                            <td> <span>   <img id="showImage" src="{{(!empty($item-> category_icon))? url($item-> category_icon): url('upload/no_image.jpg')}}" style=" width: 64px; height: 64px;"></span>  </td>
+                                            <td> <span>   <img src="{{(!empty($item-> category_icon))? url($item-> category_icon): url('upload/no_image.jpg')}}" style=" width: 64px; height: 64px;"></span>  </td>
                                             <td>{{ $item->category_name_en }}</td>
 
                                             <td>
