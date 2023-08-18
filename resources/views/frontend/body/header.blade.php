@@ -50,9 +50,9 @@
                                 <div class="topbar-link-wrapper">
                                     <span class="account-label">My Account</span>
                                     <div class="header-menu-links">
-                                        <a href="" class="header-link"> SignUp</a>
+                                        <a href="/register" class="header-link"> SignUp</a>
                                         &
-                                        <a href="" class="header-link text-decoration-none text-dark font-bold">
+                                        <a href="/login" class="header-link text-decoration-none text-dark font-bold">
                                             Login
                                         </a>
                                     </div>

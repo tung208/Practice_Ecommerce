@@ -98,22 +98,25 @@ class CategoryController extends Controller
     public function deleteCategory($id)
     {
         $cate = Category::findOrFail($id);
-//        $response = Gate::inspect('delete', $cate);
-//        dd($response);
-//        if ($response->allowed()) {
-//
-//        } else {
-//
-//        }
+        $response = Gate::inspect('delete', $cate);
+        if ($response->allowed()) {
+            SubSubCategory::where('category_id', $id)->delete();
+            SubCategory::where('category_id', $id)->delete();
+            Category::findOrFail($id)->delete();
+            $notification = array(
+                'message' => 'Category Delete Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+            $notification = array(
+                'message' => 'Category Delete Fail',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }
 
-        SubSubCategory::where('category_id', $id)->delete();
-        SubCategory::where('category_id', $id)->delete();
-        Category::findOrFail($id)->delete();
-        $notification = array(
-            'message' => 'Category Delete Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect()->back()->with($notification);
+
     }
 
     public function viewSubCategory()

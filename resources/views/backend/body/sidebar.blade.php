@@ -441,6 +441,23 @@
 
               </ul>
           </li>
+          <li class="treeview ">
+              <a href="#">
+                  <i data-feather="file"></i>
+                  <span>Blog Setting</span>
+                  <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                  <li class="{{ ($route == 'admin.viewProduct')? 'active':'' }}"><a href="{{ route('view.blog.category') }}"><i class="ti-more"></i>All Blog Category</a></li>
+                  <li class="{{ ($route == 'list.blog')? 'active':'' }}"><a href="{{ route('list.blog') }}"><i class="ti-more"></i>All Blog </a></li>
+
+                  <li class="{{ ($route == 'add.blog')? 'active':'' }}"><a href="{{ route('add.blog') }}"><i class="ti-more"></i>Add Blog</a></li>
+
+
+              </ul>
+          </li>
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\SliderController;
 use Illuminate\Support\Facades\Route;
 
@@ -103,6 +104,27 @@ Route::middleware(['auth:admin'])->group(function (){
 
     Route::get('product/inactive/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'ProductInactive'])->name('product.inactive');
     Route::get('product/active/{id}', [\App\Http\Controllers\Backend\ProductController::class, 'ProductActive'])->name('product.active');
+
+// Admin Blog  Routes
+    Route::get('/blog-category/view', [BlogController::class, 'BlogCategory'])->name('view.blog.category');
+
+    Route::post('/store/blog-category', [BlogController::class, 'BlogCategoryStore'])->name('blog.category.store');
+
+    Route::get('/edit/blog-category/{id}', [BlogController::class, 'BlogCategoryEdit'])->name('blog.category.edit');
+    Route::get('/delete/blog-category/{id}', [BlogController::class, 'BlogCategoryDelete'])->name('blog.category.delete');
+    Route::post('/update/blog-category', [BlogController::class, 'BlogCategoryUpdate'])->name('blog.category.update');
+
+// Admin View Blog Post Routes
+
+    Route::get('view/list/blog', [BlogController::class, 'ListBlogPost'])->name('list.blog');
+
+    Route::get('/add/blog', [BlogController::class, 'AddBlogPost'])->name('add.blog');
+    Route::get('/edit/blog/{id}', [BlogController::class, 'EditBlogPost'])->name('edit.blog');
+    Route::post('/update/blog', [BlogController::class, 'BlogPostUpdate'])->name('store.blog');
+    Route::post('/store/blog', [BlogController::class, 'BlogPostStore'])->name('store.blog');
+    Route::get('/delete/blog/{id}', [BlogController::class, 'DeleteBlogPost'])->name('delete.blog');
+
+
 });
 
 
@@ -111,7 +133,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('web/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 });

@@ -3543,6 +3543,15 @@ transform: scale(1.2);
 .cnt-strip {
     position: relative;
 }
+.policy-banner{
+    width: 100%;
+    height: 250px;
+    background-image: url("../images/policy_banner.jpg");
+    background-size: cover;
+}
+.policy_item:hover{
+    background: #F25C05;
+}
 
 .cnt-strip .strip {
     position: absolute;
