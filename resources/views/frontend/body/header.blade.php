@@ -43,31 +43,69 @@
                     <div class="dropdown dropdown-cart">
 
                         <div class="header-top-right">
-                            <div class="topbar-link">
-                                <a  href="#">
-                                <div class="topbar-link-toggle "></div>
-                                </a>
-                                <div class="topbar-link-wrapper">
-                                    <span class="account-label">My Account</span>
-                                    <div class="header-menu-links">
-                                        <a href="/register" class="header-link"> SignUp</a>
-                                        &
-                                        <a href="/login" class="header-link text-decoration-none text-dark font-bold">
-                                            Login
-                                        </a>
-                                    </div>
 
+                                    @if(\Illuminate\Support\Facades\Auth::check())
+                                <div class="topbar-link">
+                                    <a  href="{{route('profile.show')}}">
+                                        <div class="topbar-link-toggle "></div>
+                                    </a>
+                                    <div class="topbar-link-wrapper">
+                                        <span class="account-label">My Account</span>
+                                        <div class="header-menu-links">
+                                            <a href="{{route('profile.show')}}" class="header-link">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+
+                                            <form method="POST" class="header-link text-decoration-none text-dark font-bold" action="{{ route('logout') }}">
+                                                @csrf
+
+                                                <a class="header-link text-decoration-none text-dark font-bold" href="{{ route('logout') }}"
+                                                                     onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+                                            </form>
+
+                                        </div>
                                 </div>
                             </div>
-                            <a class="whislist-counter" href="">
+                            <a class="whislist-counter" href="{{route('get.wishlist')}}">
                                 <div class="whislist-label"></div>
                             </a>
                         </div>
+                                    @else
+                            <div class="topbar-link">
+                                <a  href="/login">
+                                    <div class="topbar-link-toggle "></div>
+                                </a>
+                                <div class="topbar-link-wrapper">
+                                        <div class="header-menu-links">
+                                            <a href="/register" class="header-link text-decoration-none text-dark font-bold">
+                                                Register
+                                            </a>
+                                        </div>
+                                        <div class="header-menu-links">
+                                            or
+                                            <a href="/login" class="header-link text-decoration-none text-dark font-bold">
+                                                Login
+                                            </a>
+                                        </div>
+                    </div>
+                </div>
+                <a class="whislist-counter" href="{{route('get.wishlist')}}">
+                    <div class="whislist-label"></div>
+                </a>
+            </div>
+                                    @endif
+
+
+
+
 
                         <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
 
                             <div class="items-cart-inner">
-                                <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
+                              <div class="basket">
+                                  <i class="glyphicon glyphicon-shopping-cart"></i>
+                                </div>
                                 <div class="basket-item-count"><span class="count" id="cartQty"> 4</span></div>
                                 <div class="total-price-basket"> <span class="lbl">cart -</span>
                                     <span class="total-price"> <span class="sign">9999 $</span>

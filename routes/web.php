@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CartPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -120,12 +122,39 @@ Route::middleware(['auth:admin'])->group(function (){
 
     Route::get('/add/blog', [BlogController::class, 'AddBlogPost'])->name('add.blog');
     Route::get('/edit/blog/{id}', [BlogController::class, 'EditBlogPost'])->name('edit.blog');
-    Route::post('/update/blog', [BlogController::class, 'BlogPostUpdate'])->name('store.blog');
+    Route::post('/update/blog', [BlogController::class, 'BlogPostUpdate'])->name('update.blog');
     Route::post('/store/blog', [BlogController::class, 'BlogPostStore'])->name('store.blog');
     Route::get('/delete/blog/{id}', [BlogController::class, 'DeleteBlogPost'])->name('delete.blog');
 
 
 });
+
+
+// Client all route
+// Product View Modal with Ajax
+Route::get('/product/view/modal/{id}', [\App\Http\Controllers\Frontend\HomeController::class, 'ProductViewAjax']);
+
+
+Route::group(['prefix'=> 'user', 'middleware'=>['auth:web']], function(){
+    // Add to Wishlist
+    Route::get('/add-to-wishlist/{product_id}', [\App\Http\Controllers\Frontend\CartController::class, 'AddToWishlist'])-> name('add.wishlist');
+    Route::get('/get-wishlist', [\App\Http\Controllers\Frontend\CartController::class, 'GetWishlist'])-> name('get.wishlist');
+    Route::get('/remove-wishlist/{product_id}', [\App\Http\Controllers\Frontend\CartController::class, 'RemoveWishlist'])-> name('remove.wishlist');
+});
+
+// Add to Cart Store Data
+Route::get('/add/cart/{id}', [CartController::class, 'AddToCart'])-> name('add.toCart');
+
+// Get Data from mini cart
+Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
+
+// Remove mini cart
+Route::get('/mini-cart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
+
+Route::get('/my-cart', [CartPageController::class, 'MyCart'])->name('mycart');
+Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+
+
 
 
 Route::middleware([

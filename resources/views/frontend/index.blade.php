@@ -93,34 +93,7 @@
 
                                                         </div>
                                                         <!-- /.product-info -->
-                                                        <div class="cart clearfix animate-effect">
-                                                            <div class="action">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="add-cart-button btn-group">
-                                                                        <button data-toggle="tooltip"
-                                                                                class="btn btn-primary icon"
-                                                                                type="button" title="Add Cart"><i
-                                                                                class="fa fa-shopping-cart"></i>
-                                                                        </button>
-                                                                        <button class="btn btn-primary cart-btn"
-                                                                                type="button">Add to cart
-                                                                        </button>
-                                                                    </li>
-                                                                    <li class="lnk wishlist"><a data-toggle="tooltip"
-                                                                                                class="add-to-cart"
-                                                                                                href="detail.html"
-                                                                                                title="Wishlist"> <i
-                                                                                class="icon fa fa-heart"></i> </a></li>
-                                                                    <li class="lnk"><a data-toggle="tooltip"
-                                                                                       class="add-to-cart"
-                                                                                       href="detail.html"
-                                                                                       title="Compare"> <i
-                                                                                class="fa fa-signal"
-                                                                                aria-hidden="true"></i> </a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <!-- /.action -->
-                                                        </div>
+
                                                         <!-- /.cart -->
                                                     </div>
                                                     <!-- /.product -->
@@ -185,20 +158,19 @@
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
-                                                                    <button class="btn btn-primary icon"
-                                                                            data-toggle="dropdown"
-                                                                            type="button"><i
-                                                                            class="fa fa-shopping-cart"></i>
-                                                                    </button>
-                                                                    <button class="btn btn-primary cart-btn"
-                                                                            type="button">Add to
-                                                                        cart
-                                                                    </button>
+                                                                    <button class="btn btn-primary icon" type="button"
+                                                                            title="Add Cart" data-toggle="modal"
+                                                                            data-target="#exampleModal"
+                                                                            id="{{ $product->id }}"
+                                                                            onclick="productView(this.id)"><i
+                                                                            class="fa fa-shopping-cart"></i></button>
+
                                                                 </li>
-                                                                <li class="lnk wishlist"><a class="add-to-cart"
-                                                                                            href="detail.html"
-                                                                                            title="Wishlist"> <i
-                                                                            class="icon fa fa-heart"></i> </a></li>
+                                                                <button class="btn btn-primary icon" type="button"
+                                                                        title="Wishlist" id="{{ $product->id }}"
+                                                                        onclick="addToWishList(this.id)"><i
+                                                                        class="fa fa-heart"></i></button>
+
                                                                 <li class="lnk"><a class="add-to-cart"
                                                                                    href="detail.html"
                                                                                    title="Compare"> <i
@@ -308,20 +280,18 @@
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
-                                                                    <button class="btn btn-primary icon"
-                                                                            data-toggle="dropdown"
-                                                                            type="button"><i
-                                                                            class="fa fa-shopping-cart"></i>
-                                                                    </button>
-                                                                    <button class="btn btn-primary cart-btn"
-                                                                            type="button">Add to
-                                                                        cart
-                                                                    </button>
+                                                                    <button class="btn btn-primary icon" type="button"
+                                                                            title="Add Cart" data-toggle="modal"
+                                                                            data-target="#exampleModal"
+                                                                            id="{{ $product->id }}"
+                                                                            onclick="productView(this.id)"><i
+                                                                            class="fa fa-shopping-cart"></i></button>
                                                                 </li>
-                                                                <li class="lnk wishlist"><a class="add-to-cart"
-                                                                                            href="detail.html"
-                                                                                            title="Wishlist"> <i
-                                                                            class="icon fa fa-heart"></i> </a></li>
+                                                                <button class="btn btn-primary icon" type="button"
+                                                                        title="Wishlist" id="{{ $product->id }}"
+                                                                        onclick="addToWishList(this.id)"><i
+                                                                        class="fa fa-heart"></i></button>
+
                                                                 <li class="lnk"><a class="add-to-cart"
                                                                                    href="detail.html"
                                                                                    title="Compare"> <i
@@ -357,9 +327,10 @@
                                 <div class="row policy-banner">
                                     <div class="col-md-12">
                                         <div class="col-md-3" style="text-align: center; margin-top: 4%">
-                                            <div> <img class="policy_item" style="width: 100px; height: 100px" src="{{asset('upload/free-delivery_4947265.png')}}"></div>
+                                            <div><img class="policy_item" style="width: 100px; height: 100px"
+                                                      src="{{asset('upload/free-delivery_4947265.png')}}"></div>
                                             <div>
-                                            <h4 style="font-weight: bold">Fast Free Shipping</h4>
+                                                <h4 style="font-weight: bold">Fast Free Shipping</h4>
                                             </div>
                                             <div>
                                                 <h5>On Orders $50 or More</h5>
@@ -368,7 +339,8 @@
 
                                         </div>
                                         <div class="col-md-3" style="text-align: center; margin-top: 4%">
-                                            <div> <img class="policy_item" style="width: 100px; height: 100px" src="{{asset('upload/customer-service_4947176.png')}}"></div>
+                                            <div><img class="policy_item" style="width: 100px; height: 100px"
+                                                      src="{{asset('upload/customer-service_4947176.png')}}"></div>
                                             <div>
                                                 <h4 style="font-weight: bold">Best Online Support</h4>
                                             </div>
@@ -377,7 +349,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3" style="text-align: center; margin-top: 4%">
-                                            <div> <img class="policy_item" style="width: 100px; height: 100px" src="{{asset('upload/cashback_4947118.png')}}"></div>
+                                            <div><img class="policy_item" style="width: 100px; height: 100px"
+                                                      src="{{asset('upload/cashback_4947118.png')}}"></div>
                                             <div>
                                                 <h4 style="font-weight: bold">Easy Money Back</h4>
                                             </div>
@@ -385,8 +358,10 @@
                                                 <h5>Return With in 30 days</h5>
                                             </div>
                                         </div>
-                                        <div class="col-md-3" style="text-align: center; margin-top: 4%;border-radius: 50%">
-                                            <div > <img class="policy_item" style="width: 100px; height: 100px;" src="{{asset('upload/discount.png')}}"></div>
+                                        <div class="col-md-3"
+                                             style="text-align: center; margin-top: 4%;border-radius: 50%">
+                                            <div><img class="policy_item" style="width: 100px; height: 100px;"
+                                                      src="{{asset('upload/discount.png')}}"></div>
                                             <div>
                                                 <h4 style="font-weight: bold">Get 20% Off 1 Item</h4>
                                             </div>
@@ -394,14 +369,14 @@
                                                 <h5>When you First Sign up</h5>
                                             </div>
                                         </div>
-{{--                                        <div class="policy-banner">--}}
-{{--                                            <div class="image"><img class="img-responsive"--}}
-{{--                                                                    src="{{asset('upload/products/banner2.png')}}"--}}
-{{--                                                                    alt=""></div>--}}
+                                        {{--                                        <div class="policy-banner">--}}
+                                        {{--                                            <div class="image"><img class="img-responsive"--}}
+                                        {{--                                                                    src="{{asset('upload/products/banner2.png')}}"--}}
+                                        {{--                                                                    alt=""></div>--}}
 
 
-{{--                                            <!-- /.new-label -->--}}
-{{--                                        </div>--}}
+                                        {{--                                            <!-- /.new-label -->--}}
+                                        {{--                                        </div>--}}
                                         <!-- /.wide-banner -->
                                     </div>
                                 </div>
@@ -450,20 +425,19 @@
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
-                                                                    <button class="btn btn-primary icon"
-                                                                            data-toggle="dropdown"
-                                                                            type="button"><i
-                                                                            class="fa fa-shopping-cart"></i>
-                                                                    </button>
-                                                                    <button class="btn btn-primary cart-btn"
-                                                                            type="button">Add to
-                                                                        cart
-                                                                    </button>
+                                                                    <button class="btn btn-primary icon" type="button"
+                                                                            title="Add To Cart" data-toggle="modal"
+                                                                            data-target="#exampleModal"
+                                                                            id="{{ $product->id }}"
+                                                                            onclick="productView(this.id)"><i
+                                                                            class="fa fa-shopping-cart"></i></button>
+
                                                                 </li>
-                                                                <li class="lnk wishlist"><a class="add-to-cart"
-                                                                                            href="detail.html"
-                                                                                            title="Wishlist"> <i
-                                                                            class="icon fa fa-heart"></i> </a></li>
+                                                                <button class="btn btn-primary icon" type="button"
+                                                                        title="Wishlist" id="{{ $product->id }}"
+                                                                        onclick="addToWishList(this.id)"><i
+                                                                        class="fa fa-heart"></i></button>
+
                                                                 <li class="lnk"><a class="add-to-cart"
                                                                                    href="detail.html"
                                                                                    title="Compare"> <i
@@ -494,133 +468,41 @@
                             <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
 
 
-
                             <!-- ============================================== BLOG SLIDER ============================================== -->
+                            @php
+                                $blogs = \App\Models\BlogPost::all();
+                            @endphp
+
                             <section class="section latest-blog outer-bottom-vs wow fadeInUp">
                                 <h3 class="section-title">From Our Blog</h3>
                                 <div class="blog-slider-container outer-top-xs">
                                     <div class="owl-carousel blog-slider custom-carousel">
-                                        <div class="item">
-                                            <div class="blog-post">
-                                                <div class="blog-post-image">
-                                                    <div class="image"><a href="blog.html"><img
-                                                                src="{{asset('frontend/assets/images/blog-post/post1.jpg')}}" alt=""></a>
+                                        @foreach($blogs as $blog)
+                                            <div class="item">
+                                                <div class="blog-post">
+                                                    <div class="blog-post-image">
+                                                        <div class="image"><a href="blog.html"><img
+                                                                    src="{{asset($blog-> post_image)}}" alt=""></a>
+                                                        </div>
                                                     </div>
+                                                    <!-- /.blog-post-image -->
+
+                                                    <div class="blog-post-info text-left">
+                                                        <h3 class="name"><a href="#">{{$blog-> post_title_en}}</a></h3>
+                                                        <span
+                                                            class="info">&nbsp; {{date("F j, Y, g:i a",strtotime($blog -> updated_at))}} </span>
+                                                        <p class="text">{!! Str::limit($blog-> post_details_en,100)!!}</p>
+                                                        <a href="#" class="lnk btn btn-primary">Read more</a></div>
+                                                    <!-- /.blog-post-info -->
+
                                                 </div>
-                                                <!-- /.blog-post-image -->
-
-                                                <div class="blog-post-info text-left">
-                                                    <h3 class="name"><a href="#">Voluptatem accusantium doloremque
-                                                            laudantium</a></h3>
-                                                    <span class="info">By Jone Doe &nbsp;|&nbsp; 21 March 2016 </span>
-                                                    <p class="text">Sed quia non numquam eius modi tempora incidunt ut
-                                                        labore et
-                                                        dolore magnam aliquam quaerat voluptatem.</p>
-                                                    <a href="#" class="lnk btn btn-primary">Read more</a></div>
-                                                <!-- /.blog-post-info -->
-
+                                                <!-- /.blog-post -->
                                             </div>
-                                            <!-- /.blog-post -->
-                                        </div>
-                                        <!-- /.item -->
+                                            <!-- /.item -->
+                                        @endforeach
 
-                                        <div class="item">
-                                            <div class="blog-post">
-                                                <div class="blog-post-image">
-                                                    <div class="image"><a href="blog.html"><img
-                                                                src="{{asset('frontend/assets/images/blog-post/post2.jpg')}}" alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.blog-post-image -->
 
-                                                <div class="blog-post-info text-left">
-                                                    <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                            pariatur</a></h3>
-                                                    <span
-                                                        class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                                    <p class="text">Sed quia non numquam eius modi tempora incidunt ut
-                                                        labore et
-                                                        dolore magnam aliquam quaerat voluptatem.</p>
-                                                    <a href="#" class="lnk btn btn-primary">Read more</a></div>
-                                                <!-- /.blog-post-info -->
 
-                                            </div>
-                                            <!-- /.blog-post -->
-                                        </div>
-                                        <!-- /.item -->
-
-                                        <!-- /.item -->
-
-                                        <div class="item">
-                                            <div class="blog-post">
-                                                <div class="blog-post-image">
-                                                    <div class="image"><a href="blog.html"><img
-                                                                src="{{'frontend/assets/images/blog-post/post1.jpg'}}" alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.blog-post-image -->
-
-                                                <div class="blog-post-info text-left">
-                                                    <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                            pariatur</a></h3>
-                                                    <span
-                                                        class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                                    <p class="text">Sed ut perspiciatis unde omnis iste natus error sit
-                                                        voluptatem accusantium</p>
-                                                    <a href="#" class="lnk btn btn-primary">Read more</a></div>
-                                                <!-- /.blog-post-info -->
-
-                                            </div>
-                                            <!-- /.blog-post -->
-                                        </div>
-                                        <!-- /.item -->
-
-                                        <div class="item">
-                                            <div class="blog-post">
-                                                <div class="blog-post-image">
-                                                    <div class="image"><a href="blog.html"><img
-                                                                src="{{'frontend/assets/images/blog-post/post2.jpg'}}" alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.blog-post-image -->
-
-                                                <div class="blog-post-info text-left">
-                                                    <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                            pariatur</a></h3>
-                                                    <span
-                                                        class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                                    <p class="text">Sed ut perspiciatis unde omnis iste natus error sit
-                                                        voluptatem accusantium</p>
-                                                    <a href="#" class="lnk btn btn-primary">Read more</a></div>
-                                                <!-- /.blog-post-info -->
-
-                                            </div>
-                                            <!-- /.blog-post -->
-                                        </div>
-                                        <!-- /.item -->
-
-                                        <div class="item">
-                                            <div class="blog-post">
-                                                <div class="blog-post-image">
-                                                    <div class="image"><a href="blog.html"><img
-                                                                src="{{'frontend/assets/images/blog-post/post1.jpg'}}" alt=""></a>
-                                                    </div>
-                                                </div>
-                                                <!-- /.blog-post-image -->
-
-                                                <div class="blog-post-info text-left">
-                                                    <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla
-                                                            pariatur</a></h3>
-                                                    <span
-                                                        class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
-                                                    <p class="text">Sed ut perspiciatis unde omnis iste natus error sit
-                                                        voluptatem accusantium</p>
-                                                    <a href="#" class="lnk btn btn-primary">Read more</a></div>
-                                                <!-- /.blog-post-info -->
-
-                                            </div>
-                                            <!-- /.blog-post -->
-                                        </div>
                                         <!-- /.item -->
 
                                     </div>
@@ -630,7 +512,6 @@
                             </section>
                             <!-- /.section -->
                             <!-- ============================================== BLOG SLIDER : END ============================================== -->
-
 
 
                         </div>

@@ -7,6 +7,7 @@ use App\Models\BlogPost;
 use App\Models\BlogPostCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Image;
 
 class BlogController extends Controller
 {
@@ -80,8 +81,90 @@ class BlogController extends Controller
 
         $blogcategory = BlogPostCategories::latest()->get();
         $blogpost = BlogPost::latest()->get();
-        return view('backend.blog.post.view_post',compact('blogpost','blogcategory'));
+        return view('backend.blog.post.add_post',compact('blogpost','blogcategory'));
 
     }
+    public function BlogPostStore(Request $request){
+        $request -> validate([
+            'post_title_en' => 'required',
+            'post_image' => 'required'
+        ],[
+            'post_title_en.required' => 'Please input post title',
+            'post_image.required' => 'Please input post image',
+        ]);
 
+        $image = $request-> file('post_image');
+        $name_gen = hexdec(uniqid()).'.'.$image-> getClientOriginalExtension();
+        $save_url = 'upload/blog/'.$name_gen;
+        Image::make($image) ->resize(780,433) -> save($save_url);
+
+        BlogPost::insert([
+            'category_id' => $request->category_id,
+            'post_title_en' => $request->post_title_en,
+            'post_slug_en' => strtolower(str_replace(' ', '-',$request->post_title_en)),
+            'post_image' => $save_url,
+            'post_details_en' => $request->post_details_en,
+            'created_at' => Carbon::now(),
+        ]);
+        $notification = array(
+            'message' => 'Add Blog Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()-> route('list.blog') -> with($notification);
+    }
+
+    public function DeleteBlogPost($id){
+     $blog=  BlogPost::findOrFail($id);
+     unlink($blog-> post_image);
+     $blog-> delete();
+        $notification = array(
+            'message' => 'Delete Blog Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()-> route('list.blog') -> with($notification);
+
+    }
+    public function EditBlogPost($id){
+        $blog= BlogPost::findOrFail($id);
+        $blog_cate = BlogPostCategories::latest()-> get();
+        return view('backend.blog.post.edit_blog',compact('blog','blog_cate'));
+    }
+    public function BlogPostUpdate(Request $request){
+        $blog_id = $request -> id;
+        if($request -> file('post_image')) {
+            $blog =  BlogPost::findOrFail($blog_id);
+            unlink($blog -> post_image);
+            $image = $request-> file('post_image');
+            $name_gen = hexdec(uniqid()).'.'.$image-> getClientOriginalExtension();
+            $save_url = 'upload/blog/'.$name_gen;
+            Image::make($image) ->resize(780,433) -> save($save_url);
+
+            BlogPost::findOrFail($blog_id)->update([
+                'category_id' => $request->category_id,
+                'post_title_en' => $request->post_title_en,
+                'post_slug_en' => strtolower(str_replace(' ', '-', $request->post_title_en)),
+                'post_image' => $save_url,
+                'post_details_en' => $request->post_details_en,
+                'updated_at' => Carbon::now(),
+            ]);
+            $notification = array(
+                'message' => 'Update Blog Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()-> back() -> with($notification);
+        } else {
+            BlogPost::findOrFail($blog_id)->update([
+                'category_id' => $request->category_id,
+                'post_title_en' => $request->post_title_en,
+                'post_slug_en' => strtolower(str_replace(' ', '-', $request->post_title_en)),
+                'post_details_en' => $request->post_details_en,
+                'updated_at' => Carbon::now(),
+            ]);
+            $notification = array(
+                'message' => 'Update Blog Without Image Successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()-> back() -> with($notification);
+        }
+    }
 }

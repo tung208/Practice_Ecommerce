@@ -64,6 +64,9 @@ class CategoryController extends Controller
 
         ]);
         if ($request->file('category_icon')) {
+
+            $category = Category::findOrFail($cate_id);
+            unlink($category-> category_icon);
             $image = $request->file('category_icon');
             $name_gen = hexdec(uniqid()) . "." . $image->getClientOriginalName();
             Image::make($image)->resize(183, 199)->save('upload/category/' . $name_gen);
@@ -102,6 +105,7 @@ class CategoryController extends Controller
         if ($response->allowed()) {
             SubSubCategory::where('category_id', $id)->delete();
             SubCategory::where('category_id', $id)->delete();
+            unlink($cate-> category_icon);
             Category::findOrFail($id)->delete();
             $notification = array(
                 'message' => 'Category Delete Successfully',
