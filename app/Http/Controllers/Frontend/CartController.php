@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ShipDivision;
 use App\Models\Whishlist;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -13,12 +14,13 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     //
-    public function AddToWishlist(Request $request, $product_id){
+    public function AddToWishlist(Request $request, $product_id)
+    {
         $product = Product::findOrFail($product_id);
-        if(Auth::check()){
-            $exist = Whishlist::where('user_id',Auth::id())-> where('product_id',$product_id)-> first();
+        if (Auth::check()) {
+            $exist = Whishlist::where('user_id', Auth::id())->where('product_id', $product_id)->first();
 
-            if(!$exist){
+            if (!$exist) {
                 Whishlist::insert([
                     'user_id' => Auth::id(),
                     'product_id' => $product_id,
@@ -26,30 +28,36 @@ class CartController extends Controller
 
                 ]);
 
-                return response() -> json(['success'=>'Successfully Added On Your Wishlist']);
+                return response()->json(['success' => 'Successfully Added On Your Wishlist']);
 
-            }else{
-                return response() -> json(['error'=>'This Product has Already on Your Wishlist']);
+            } else {
+                return response()->json(['error' => 'This Product has Already on Your Wishlist']);
             }
-        }else{
+        } else {
             return response()->json(['error' => 'At First You Must Login Your Account']);
         }
     }
-    public function GetWishList(){
-        $wishlist = Whishlist::with('product') -> where('user_id',Auth::id())->  get();
-        return view('frontend.wishlist.view_wishlist',compact('wishlist'));
+
+    public function GetWishList()
+    {
+        $wishlist = Whishlist::with('product')->where('user_id', Auth::id())->get();
+        return view('frontend.wishlist.view_wishlist', compact('wishlist'));
     }
-    public function RemoveWishlist($product_id){
-        Whishlist::findOrFail($product_id) -> delete();
+
+    public function RemoveWishlist($product_id)
+    {
+        Whishlist::findOrFail($product_id)->delete();
         $notification = array(
             'message' => 'Remove Product From Wishlist Successfully',
             'alert-type' => 'success'
         );
-        return redirect()-> back()-> with($notification);
+        return redirect()->back()->with($notification);
     }
-    public function AddToCart(Request $request,$id){
+
+    public function AddToCart(Request $request, $id)
+    {
         $product = Product::findOrFail($id);
-        if($product -> discount_price == null){
+        if ($product->discount_price == null) {
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
@@ -64,7 +72,7 @@ class CartController extends Controller
                 ],
             ]);
             return response()->json(['success' => 'Successfully Added on Your Cart']);
-        }else{
+        } else {
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
@@ -81,7 +89,9 @@ class CartController extends Controller
             return response()->json(['success' => 'Successfully Added on Your Cart']);
         }
     }
-    public function AddMiniCart(){
+
+    public function AddMiniCart()
+    {
         $carts = Cart::content();
         $cartQty = Cart::count();
         $cartTotal = Cart::total();
@@ -92,11 +102,33 @@ class CartController extends Controller
 
         ));
     }
-    public function RemoveMiniCart($rowId){
+
+    public function RemoveMiniCart($rowId)
+    {
         Cart::remove($rowId);
         return response()->json(['success' => 'Product Removed from Cart']);
     }
-public function CheckoutCreate(){
 
-}
+    public function CheckoutCreate()
+    {
+        if(Auth::check()){
+                if(Cart::total()>0){
+                    $carts = Cart::content();
+                    $cartQty= Cart::count();
+                    $cartTotal = Cart::total();
+                    $divisions = ShipDivision::orderBy('division_name','ASC')-> get();
+                    return view('frontend.checkout.view_checkout',compact('carts','cartQty','cartTotal','divisions'));
+                }else{
+                    $notification = array(
+                        'message' => 'Shopping At list One Product',
+                        'alert-type' => 'error');
+                    return redirect()->to('/')->with($notification);
+                }
+        }else{
+            $notification = array(
+                'message' => 'You Need to Login First',
+                'alert-type' => 'error');
+            return redirect()->route('login')->with($notification);
+        }
+    }
 }
