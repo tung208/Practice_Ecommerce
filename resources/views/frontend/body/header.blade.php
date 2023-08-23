@@ -50,7 +50,7 @@
                                         <div class="topbar-link-toggle "></div>
                                     </a>
                                     <div class="topbar-link-wrapper">
-                                        <span class="account-label">My Account</span>
+
                                         <div class="header-menu-links">
                                             <a href="{{route('profile.show')}}" class="header-link">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
 
@@ -103,13 +103,13 @@
                         <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
 
                             <div class="items-cart-inner">
-                              <div class="basket">
-                                  <i class="glyphicon glyphicon-shopping-cart"></i>
+                                <div class="basket">
+                               <i class="glyphicon glyphicon-shopping-cart" ></i>
                                 </div>
-                                <div class="basket-item-count"><span class="count" id="cartQty"> 4</span></div>
-                                <div class="total-price-basket"> <span class="lbl">cart -</span>
-                                    <span class="total-price"> <span class="sign">9999 $</span>
-                <span class="value" id="cartSubTotal"> </span> </span> </div>
+                                <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
+                                <div class="total-price-basket"> <span class="lbl">Cart-</span>
+                                    <span class="total-price"> <span class="sign"></span>
+                <span class="value" id="cartSubTotal"></span> </span> </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
@@ -124,9 +124,10 @@
 
 
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Sub Total :</span>
+                                    <div class="pull-right"> <span class="text">Sub Total:</span>
                                         <span class='price'  id="cartSubTotal">  </span> </div>
                                     <div class="clearfix"></div>
+                                    <a href="{{route('mycart')}}" class="btn btn-upper btn-primary btn-block m-t-20">View my cart</a>
                                     <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
                                 <!-- /.cart-total-->
 

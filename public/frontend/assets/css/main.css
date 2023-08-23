@@ -4562,7 +4562,7 @@ transform: scale(1.2);
 }
 
 .single-product .favorite-button .btn-primary {
-    background: #ddd
+    background: hotpink;
 }
 
 .single-product .gallery-holder #owl-single-product .single-product-gallery-item {
@@ -4595,7 +4595,15 @@ transform: scale(1.2);
 
 .single-product .product-info .stock-container .stock-box .value {
     font-size: 13px;
-    color: #ff7878;
+    color: #00E466;
+    font-weight: bold;
+
+}
+.single-product .product-info .stock-container .stock-box .out-stock {
+    font-size: 13px;
+    color: red;
+    font-weight: bold;
+
 }
 
 .single-product .product-info .description-container {

@@ -87,7 +87,8 @@
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
-                                                            <div class="product-price"><span class="price">({{count($category)}} items) </span> {{--<span class="price-before-discount">$ 800</span>--}}
+                                                            @php $count = \App\Models\Product::where('category_id',$item->id)-> get(); @endphp
+                                                            <div class="product-price"><span class="price">({{count($count)}} items) </span> {{--<span class="price-before-discount">$ 800</span>--}}
                                                             </div>
                                                             <!-- /.product-price -->
 
@@ -130,7 +131,7 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"><a href="detail.html"><img
+                                                        <div class="image"><a href="{{route('product.detail',$product -> id)}}"><img
                                                                     src="{{$product-> product_thumbnail}}" alt=""></a>
                                                         </div>
                                                         <!-- /.image -->
@@ -141,7 +142,7 @@
 
                                                     <div class="product-info text-left">
                                                         <h3 class="name"><a
-                                                                href="detail.html">{{$product-> product_name_en}}</a>
+                                                                href="{{route('product.detail',$product -> id)}}">{{$product-> product_name_en}}</a>
                                                         </h3>
                                                         <div class="rating rateit-small"></div>
                                                         <div class="description"></div>
@@ -252,7 +253,7 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"><a href="detail.html"><img
+                                                        <div class="image"><a href="{{route('product.detail',$product -> id)}}"><img
                                                                     src="{{$product-> product_thumbnail}}" alt=""></a>
                                                         </div>
                                                         <!-- /.image -->
@@ -263,7 +264,7 @@
 
                                                     <div class="product-info text-left">
                                                         <h3 class="name"><a
-                                                                href="detail.html">{{$product-> product_name_en}}</a>
+                                                                href="{{route('product.detail',$product -> id)}}">{{$product-> product_name_en}}</a>
                                                         </h3>
                                                         <div class="rating rateit-small"></div>
                                                         <div class="description"></div>
@@ -397,7 +398,7 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"><a href="detail.html"><img
+                                                        <div class="image"><a href="{{route('product.detail',$product -> id)}}"><img
                                                                     src="{{$product-> product_thumbnail}}" alt=""></a>
                                                         </div>
                                                         <!-- /.image -->
@@ -408,7 +409,7 @@
 
                                                     <div class="product-info text-left">
                                                         <h3 class="name"><a
-                                                                href="detail.html">{{$product-> product_name_en}}</a>
+                                                                href="{{route('product.detail',$product -> id)}}">{{$product-> product_name_en}}</a>
                                                         </h3>
                                                         <div class="rating rateit-small"></div>
                                                         <div class="description"></div>

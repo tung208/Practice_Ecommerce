@@ -35,9 +35,19 @@
                                     <th class="cart-total last-item">Remove</th>
                                 </tr>
                                 </thead><!-- /thead -->
-                                <tbody id="cartPage">
 
+                                <tbody id="cartPage">
+                             {{--   @foreach($carts as $item)
+                                    <td><img src="{{asset($item->options->image)}}" style="width: 75px;height: 75px"></td>
+                                    <td >{{$item-> name}}</td>
+                                    <td>{{$item-> options-> color}}</td>
+                                    <td>{{$item-> options-> size}}</td>
+                                    <td >{{$item-> qty}}</td>
+                                    <td >{{$item-> subtotal}}</td>
+                                    <td ><a>Remove</a></td>
+                                @endforeach--}}
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Whishlist;
-use Gloudemans\Shoppingcart\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +56,7 @@ class CartController extends Controller
                 'qty' => $request->quantity,
                 'price' => $product->selling_price,
                 'weight' => 1,
+
                 'options' => [
                     'image' => $product->product_thumbnail,
                     'color' => $request->color,
@@ -70,6 +71,7 @@ class CartController extends Controller
                 'qty' => $request->quantity,
                 'price' => $product->discount_price,
                 'weight' => 1,
+                'image' => $product->product_thumbnail,
                 'options' => [
                     'image' => $product->product_thumbnail,
                     'color' => $request->color,
@@ -86,12 +88,13 @@ class CartController extends Controller
         return response()->json(array(
             'carts' => $carts,
             'cartQty' => $cartQty,
-            'cartTotal' => round($cartTotal),
+            'cartTotal' => $cartTotal,
 
         ));
     }
-    public function RemoveMiniCart(){
-
+    public function RemoveMiniCart($rowId){
+        Cart::remove($rowId);
+        return response()->json(['success' => 'Product Removed from Cart']);
     }
 public function CheckoutCreate(){
 

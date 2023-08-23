@@ -2,7 +2,7 @@
 @section('content')
 
     @section('title')
-        Wish List Page
+        Wishlist Page
     @endsection
 
 

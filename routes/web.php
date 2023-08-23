@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\CheckoutController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CartPageController;
@@ -127,12 +129,53 @@ Route::middleware(['auth:admin'])->group(function (){
     Route::get('/delete/blog/{id}', [BlogController::class, 'DeleteBlogPost'])->name('delete.blog');
 
 
+    // Ship Division
+    Route::get('/division/view', [ShippingAreaController::class, 'DivisionView'])->name('manage-division');
+
+    Route::post('/division/store', [ShippingAreaController::class, 'DivisionStore'])->name('division.store');
+
+    Route::get('/division/edit/{id}', [ShippingAreaController::class, 'DivisionEdit'])->name('division.edit');
+
+    Route::post('/division/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('division.update');
+
+    Route::get('/division/delete/{id}', [ShippingAreaController::class, 'DivisionDelete'])->name('division.delete');
+
+
+
+// Ship District
+    Route::get('/district/view', [ShippingAreaController::class, 'DistrictView'])->name('manage-district');
+
+    Route::post('/district/store', [ShippingAreaController::class, 'DistrictStore'])->name('district.store');
+
+    Route::get('/district/edit/{id}', [ShippingAreaController::class, 'DistrictEdit'])->name('district.edit');
+
+    Route::post('/district/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('district.update');
+
+    Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
+
+
+// Ship State
+    Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('manage-state');
+
+    Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
+
+    Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
+
+    Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
+
+    Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
+
+
 });
 
 
 // Client all route
 // Product View Modal with Ajax
 Route::get('/product/view/modal/{id}', [\App\Http\Controllers\Frontend\HomeController::class, 'ProductViewAjax']);
+//Product Detail
+Route::get('/product/detail/{id}', [\App\Http\Controllers\Frontend\HomeController::class, 'ProductDetail'])-> name('product.detail');
+
+
 
 
 Route::group(['prefix'=> 'user', 'middleware'=>['auth:web']], function(){
@@ -140,20 +183,38 @@ Route::group(['prefix'=> 'user', 'middleware'=>['auth:web']], function(){
     Route::get('/add-to-wishlist/{product_id}', [\App\Http\Controllers\Frontend\CartController::class, 'AddToWishlist'])-> name('add.wishlist');
     Route::get('/get-wishlist', [\App\Http\Controllers\Frontend\CartController::class, 'GetWishlist'])-> name('get.wishlist');
     Route::get('/remove-wishlist/{product_id}', [\App\Http\Controllers\Frontend\CartController::class, 'RemoveWishlist'])-> name('remove.wishlist');
+    Route::get('/get-cart-product', [CartPageController::class, 'GetCartProduct']);
+    Route::get('/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
+
+    Route::post('/review-store', [\App\Http\Controllers\Backend\ReviewController::class, 'ReviewStore'])-> name('review.store');
+
 });
 
 // Add to Cart Store Data
 Route::get('/add/cart/{id}', [CartController::class, 'AddToCart'])-> name('add.toCart');
 
+
 // Get Data from mini cart
-Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
+Route::get('/product/mini-cart', [CartController::class, 'AddMiniCart']);
+// Remove mini cart
+Route::get('/mini-cart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
 
 // Remove mini cart
 Route::get('/mini-cart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
 
 Route::get('/my-cart', [CartPageController::class, 'MyCart'])->name('mycart');
+Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);
+Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement']);
+Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+// Checkout Routes
+
 Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
 
+Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
+
+Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
+
+Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
 
 
 
