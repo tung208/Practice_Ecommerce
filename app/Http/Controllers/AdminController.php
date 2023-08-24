@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Pipeline;
 use App\Actions\Fortify\AttemptToAuthenticate;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
@@ -106,6 +107,10 @@ public function loginForm(){
         $request->session()->regenerateToken();
 
         return app(LogoutResponse::class);
+    }
+    public function AdminLogout(){
+        Auth::logout();
+        return Redirect()->route('login');
     }
 }
 

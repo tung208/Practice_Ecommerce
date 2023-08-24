@@ -94,7 +94,7 @@ class CartController extends Controller
     {
         $carts = Cart::content();
         $cartQty = Cart::count();
-        $cartTotal = Cart::total();
+        $cartTotal = Cart::subtotal();
         return response()->json(array(
             'carts' => $carts,
             'cartQty' => $cartQty,
@@ -111,11 +111,12 @@ class CartController extends Controller
 
     public function CheckoutCreate()
     {
+
         if(Auth::check()){
                 if(Cart::total()>0){
                     $carts = Cart::content();
                     $cartQty= Cart::count();
-                    $cartTotal = Cart::total();
+                    $cartTotal = Cart::subtotal();
                     $divisions = ShipDivision::orderBy('division_name','ASC')-> get();
                     return view('frontend.checkout.view_checkout',compact('carts','cartQty','cartTotal','divisions'));
                 }else{

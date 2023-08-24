@@ -46,23 +46,16 @@
 
                                     @if(\Illuminate\Support\Facades\Auth::check())
                                 <div class="topbar-link">
-                                    <a  href="{{route('profile.show')}}">
+                                    <a  href="{{route('user.dashboard')}}">
                                         <div class="topbar-link-toggle "></div>
                                     </a>
                                     <div class="topbar-link-wrapper">
 
                                         <div class="header-menu-links">
-                                            <a href="{{route('profile.show')}}" class="header-link">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                                            <a href="{{route('user.dashboard')}}" class="header-link">{{\Illuminate\Support\Facades\Auth::user()->name}}</a><br>
+                                            <a href="{{route('my.orders')}}" class="header-link"> My Order</a><br>
+                                            <a href="{{route('user.logout')}}" class="header-link"> Logout</a>
 
-                                            <form method="POST" class="header-link text-decoration-none text-dark font-bold" action="{{ route('logout') }}">
-                                                @csrf
-
-                                                <a class="header-link text-decoration-none text-dark font-bold" href="{{ route('logout') }}"
-                                                                     onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
-                                            </form>
 
                                         </div>
                                 </div>
@@ -128,7 +121,7 @@
                                         <span class='price'  id="cartSubTotal">  </span> </div>
                                     <div class="clearfix"></div>
                                     <a href="{{route('mycart')}}" class="btn btn-upper btn-primary btn-block m-t-20">View my cart</a>
-                                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
+                                    <a href="{{route('checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
                                 <!-- /.cart-total-->
 
                             </li>
@@ -237,7 +230,7 @@
                                                     <!-- /.col -->
                                                     <!-- /.col -->
 
-                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image"> <img class="img-responsive" src="assets/images/banners/top-menu-banner.jpg" alt=""> </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image"> <img class="img-responsive" src="{{asset('frontend/assets/images/banners/top-menu-banner.jpg')}}" alt=""> </div>
                                                     <!-- /.yamm-content -->
                                                 </div>
                                             </div>

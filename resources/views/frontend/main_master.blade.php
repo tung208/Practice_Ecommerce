@@ -72,7 +72,8 @@
 <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
-
+<script src="{{ asset('../assets/vendor_components/datatable/datatables.min.js') }}"></script>
+<script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -614,6 +615,10 @@
 </script>
 
 <!-- //End Load My cart / -->
+
+{{-- //ship address//--}}
+
+
 
 </body>
 </html>

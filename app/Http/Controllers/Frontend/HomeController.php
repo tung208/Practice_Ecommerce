@@ -7,6 +7,7 @@ use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -36,5 +37,9 @@ class HomeController extends Controller
 
 
         return view('frontend.product.product_detail',compact('product','multiImag','product_color_en','product_size_en','relatedProduct','reviewcount','avarage','reviews'));
+    }
+    public function UserLogout(){
+        Auth::logout();
+        return Redirect()->route('login');
     }
 }

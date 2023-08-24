@@ -11,14 +11,16 @@ use Illuminate\Support\Carbon;
 
 class ShippingAreaController extends Controller
 {
-    public function DivisionView(){
-        $divisions = ShipDivision::orderBy('id','DESC')->get();
-        return view('backend.ship.division.view_division',compact('divisions'));
+    public function DivisionView()
+    {
+        $divisions = ShipDivision::orderBy('id', 'DESC')->get();
+        return view('backend.ship.division.view_division', compact('divisions'));
 
     }
 
 
-    public function DivisionStore(Request $request){
+    public function DivisionStore(Request $request)
+    {
 
         $request->validate([
             'division_name' => 'required',
@@ -43,16 +45,16 @@ class ShippingAreaController extends Controller
     } // end method
 
 
-
-    public function DivisionEdit($id){
+    public function DivisionEdit($id)
+    {
 
         $divisions = ShipDivision::findOrFail($id);
-        return view('backend.ship.division.edit_division',compact('divisions'));
+        return view('backend.ship.division.edit_division', compact('divisions'));
     }
 
 
-
-    public function DivisionUpdate(Request $request,$id){
+    public function DivisionUpdate(Request $request, $id)
+    {
 
         ShipDivision::findOrFail($id)->update([
 
@@ -72,7 +74,8 @@ class ShippingAreaController extends Controller
     } // end mehtod
 
 
-    public function DivisionDelete($id){
+    public function DivisionDelete($id)
+    {
 
         ShipDivision::findOrFail($id)->delete();
 
@@ -86,17 +89,18 @@ class ShippingAreaController extends Controller
     } // end method
 
 
-
     //// Start Ship District
 
-    public function DistrictView(){
-        $division = ShipDivision::orderBy('division_name','ASC')->get();
-        $district = ShipDistrict::with('division')->orderBy('id','DESC')->get();
-        return view('backend.ship.district.view_district',compact('division','district'));
+    public function DistrictView()
+    {
+        $division = ShipDivision::orderBy('division_name', 'ASC')->get();
+        $district = ShipDistrict::with('division')->orderBy('id', 'DESC')->get();
+        return view('backend.ship.district.view_district', compact('division', 'district'));
     }
 
 
-    public function DistrictStore(Request $request){
+    public function DistrictStore(Request $request)
+    {
 
         $request->validate([
             'division_id' => 'required',
@@ -123,18 +127,17 @@ class ShippingAreaController extends Controller
     } // end method
 
 
+    public function DistrictEdit($id)
+    {
 
-    public function DistrictEdit($id){
-
-        $division = ShipDivision::orderBy('division_name','ASC')->get();
+        $division = ShipDivision::orderBy('division_name', 'ASC')->get();
         $district = ShipDistrict::findOrFail($id);
-        return view('backend.ship.district.edit_district',compact('district','division'));
+        return view('backend.ship.district.edit_district', compact('district', 'division'));
     }
 
 
-
-
-    public function DistrictUpdate(Request $request,$id){
+    public function DistrictUpdate(Request $request, $id)
+    {
 
         ShipDistrict::findOrFail($id)->update([
 
@@ -155,10 +158,8 @@ class ShippingAreaController extends Controller
     } // end mehtod
 
 
-
-
-
-    public function DistrictDelete($id){
+    public function DistrictDelete($id)
+    {
 
         ShipDistrict::findOrFail($id)->delete();
 
@@ -177,17 +178,17 @@ class ShippingAreaController extends Controller
 
     ////////////////// Ship State //////////
 
-    public function StateView(){
-        $division = ShipDivision::orderBy('division_name','ASC')->get();
-        $district = ShipDistrict::orderBy('district_name','ASC')->get();
-        $state = ShipState::with('division','district')->orderBy('id','DESC')->get();
-        return view('backend.ship.state.view_state',compact('division','district','state'));
+    public function StateView()
+    {
+        $division = ShipDivision::orderBy('division_name', 'ASC')->get();
+        $district = ShipDistrict::orderBy('district_name', 'ASC')->get();
+        $state = ShipState::with('division', 'district')->orderBy('id', 'DESC')->get();
+        return view('backend.ship.state.view_state', compact('division', 'district', 'state'));
     }
 
 
-
-
-    public function StateStore(Request $request){
+    public function StateStore(Request $request)
+    {
 
         $request->validate([
             'division_id' => 'required',
@@ -216,17 +217,18 @@ class ShippingAreaController extends Controller
     } // end method
 
 
-    public function StateEdit($id){
-        $division = ShipDivision::orderBy('division_name','ASC')->get();
-        $district = ShipDistrict::orderBy('district_name','ASC')->get();
+    public function StateEdit($id)
+    {
         $state = ShipState::findOrFail($id);
-        return view('backend.ship.state.edit_state',compact('division','district','state'));
+        $division = ShipDivision:: where('id', $state->division_id)->get();
+        $district = ShipDistrict::where('division_id', $state->division_id)->orderBy('district_name', 'ASC')->get();
+
+        return view('backend.ship.state.edit_state', compact('division', 'district', 'state'));
     }
 
 
-
-
-    public function StateUpdate(Request $request,$id){
+    public function StateUpdate(Request $request, $id)
+    {
 
         ShipState::findOrFail($id)->update([
 
@@ -248,7 +250,8 @@ class ShippingAreaController extends Controller
     } // end mehtod
 
 
-    public function StateDelete($id){
+    public function StateDelete($id)
+    {
 
         ShipState::findOrFail($id)->delete();
 
@@ -265,8 +268,16 @@ class ShippingAreaController extends Controller
     //////////////// End Ship State ////////////
 
 
+    public function DistrictGetAjax($division_id)
+    {
+        $ship_district = ShipDistrict::where('division_id', $division_id)->get();
+        return json_encode($ship_district);
+    }
 
-
-
+    public function StateGetAjax($district_id)
+    {
+        $state = ShipState::where('district_id', $district_id)->get();
+        return json_encode($state);
+    }
 
 }
