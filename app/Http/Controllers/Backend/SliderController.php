@@ -30,7 +30,7 @@ class SliderController extends Controller
             unlink($old_img);
             $img = $request->file('slider_img');
             $name_gen = hexdec(uniqid()) . '.' . $img->getClientOriginalName();
-            Image::make($img)->resize(1000, 370)->save('upload/slider/' . $name_gen);
+            Image::make($img)->resize(1140, 370)->save('upload/slider/' . $name_gen);
             $save_url = 'upload/slider/' . $name_gen;
 
             Slider::findOrFail($slider_id)->update([
@@ -71,7 +71,7 @@ class SliderController extends Controller
         ]);
         $img = $request->file('slider_img');
         $name_gen = hexdec(uniqid()) . '.' . $img->getClientOriginalName();
-        Image::make($img)->resize(1000, 370)->save('upload/slider/' . $name_gen);
+        Image::make($img)->resize(1140, 370)->save('upload/slider/' . $name_gen);
         $save_url = 'upload/slider/' . $name_gen;
         Slider::insert([
             'title' => $request->title,

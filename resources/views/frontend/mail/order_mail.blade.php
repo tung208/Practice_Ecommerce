@@ -129,9 +129,7 @@
                                                                     <tr>
 
                                                                         <td class="col-md-1">
-                                                                            <label for=""><img
-                                                                                    src="{{ asset($o->product->product_thumbnail) }}"
-                                                                                    height="50px;" width="50px;">
+                                                                            <label for=""> <img src="{{ public_path($o->product->product_thumbnail)  }}" height="50px;" width="60px;" alt="">
                                                                             </label>
                                                                         </td>
 

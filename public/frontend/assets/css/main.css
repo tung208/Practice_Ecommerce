@@ -1799,7 +1799,7 @@ header {
 }
 
 .header-style-1 .header-nav .navbar-default .navbar-collapse .navbar-nav > li .menu-label.new-menu {
-    background: #f1c40f;
+    background: #F25C05;
 }
 
 .header-style-1 .header-nav .navbar-default .navbar-collapse .navbar-nav > li .menu-label.new-menu:after {
@@ -2848,7 +2848,7 @@ header {
 }
 
 #owl-main .item .caption {
-    color: #636363;
+    color: #ee1044;
     left: 50px;
     position: absolute;
     top: 24%;
@@ -2913,14 +2913,14 @@ header {
 #owl-main .item .caption.bg-color .big-text {
     background: rgba(0, 0, 0, 0);
     padding: 0px;
-    color: #00E466;
+    color: #FFFFFF;
 }
 
 #owl-main .item .caption.bg-color .excerpt,
 #owl-main .item .caption.bg-color .small {
     background: rgba(0, 0, 0, 0);
     padding: 0px;
-    color: #6E8192;
+    color: #00E466;
     margin-top: 0px;
 }
 

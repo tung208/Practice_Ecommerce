@@ -20,7 +20,7 @@
                         <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
                             @foreach($sliders as $slider)
                                 <div class="item"
-                                     style="background-image: url({{$slider-> slider_img}}); float: right; width: 900px  ">
+                                     style="background-image: url({{$slider-> slider_img}}); float: right; width: 1140px  ">
                                     <div class="container-fluid">
                                         <div class="caption bg-color vertical-center text-left">
                                             <div
@@ -29,7 +29,7 @@
                                             <div class="excerpt fadeInDown-2 hidden-xs"><span>{{$slider-> title}}</span>
                                             </div>
                                             <div class="button-holder fadeInDown-3"><a
-                                                    href="index.php?page=single-product"
+                                                    href="{{route('list.product',0)}}"
                                                     class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop
                                                     Now</a></div>
                                         </div>
@@ -72,7 +72,7 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"><a href="detail.html"><img
+                                                            <div class="image"><a href="{{route('list.product',$item->id)}}"><img
                                                                         src="{{$item -> category_icon}}" alt=""></a>
                                                             </div>
                                                             <!-- /.image -->
@@ -83,7 +83,7 @@
 
                                                         <div class="product-info text-left">
                                                             <h3 class="name"><a
-                                                                    href="detail.html">{{$item -> category_name_en}}</a>
+                                                                    href="{{route('list.product',$item->id)}}">{{$item -> category_name_en}}</a>
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>

@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function storeProduct(Request $request)
     {
 
-        /*  $request->validate([
+         $request->validate([
               'file' => 'required|mimes:jpeg,png,jpg,zip,pdf|max:2048',
           ]);
 
@@ -40,7 +40,7 @@ class ProductController extends Controller
               $destinationPath = 'upload/pdf'; // upload path
               $digitalItem = date('YmdHis') . "." . $files->getClientOriginalExtension();
               $files->move($destinationPath,$digitalItem);
-          }*/
+          }
 
 
         $image = $request->file('product_thumbnail');
@@ -72,7 +72,7 @@ class ProductController extends Controller
             'featured' => $request->featured,
             'special_offer' => $request->special_offer,
             'special_deals' => $request->special_deals,
-
+            'digital_file' => $digitalItem,
             'product_thumbnail' => $save_url,
 
             'status' => 1,

@@ -11,10 +11,11 @@
                     @endphp
 
 
-                        <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo"> <a href="{{ url('/') }}"> <img src="{{$setting->logo}}" alt="logo"> </a> </div>
+                            <!-- ============================================================= LOGO ============================================================= -->
+                    <div class="logo"><a href="{{ url('/') }}"> <img src="{{url($setting->logo)}}" alt="logo"> </a></div>
                     <!-- /.logo -->
-                    <!-- ============================================================= LOGO : END ============================================================= --> </div>
+                    <!-- ============================================================= LOGO : END ============================================================= -->
+                </div>
                 <!-- /.logo-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
@@ -25,14 +26,17 @@
                             @csrf
                             <div class="control-group">
 
-                                <input class="search-field" onfocus="search_result_show()" onblur="search_result_hide()" id="search" name="search" placeholder="Search product..." />
-                                <button class="search-button" type="submit"></button> </div>
+                                <input class="search-field" onfocus="search_result_show()" onblur="search_result_hide()"
+                                       id="search" name="search" placeholder="Search product..."/>
+                                <button class="search-button" type="submit"></button>
+                            </div>
                         </form>
                         <div id="searchProducts"></div>
                     </div>
 
                     <!-- /.search-area -->
-                    <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
+                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+                </div>
                 <!-- /.top-search-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row">
@@ -44,100 +48,101 @@
 
                         <div class="header-top-right">
 
-                                    @if(\Illuminate\Support\Facades\Auth::check())
+                            @if(\Illuminate\Support\Facades\Auth::check())
                                 <div class="topbar-link">
-                                    <a  href="{{route('user.dashboard')}}">
+                                    <a href="{{route('user.dashboard')}}">
                                         <div class="topbar-link-toggle "></div>
                                     </a>
                                     <div class="topbar-link-wrapper">
 
                                         <div class="header-menu-links">
-                                            <a href="{{route('user.dashboard')}}" class="header-link">{{\Illuminate\Support\Facades\Auth::user()->name}}</a><br>
+                                            <a href="{{route('user.dashboard')}}"
+                                               class="header-link">{{\Illuminate\Support\Facades\Auth::user()->name}}</a><br>
                                             <a href="{{route('my.orders')}}" class="header-link"> My Order</a><br>
                                             <a href="{{route('user.logout')}}" class="header-link"> Logout</a>
 
 
                                         </div>
+                                    </div>
+                                </div>
+                                <a class="whislist-counter" href="{{route('get.wishlist')}}">
+                                    <div class="whislist-label"></div>
+                                </a>
+                        </div>
+                        @else
+                            <div class="topbar-link">
+                                <a href="/login">
+                                    <div class="topbar-link-toggle "></div>
+                                </a>
+                                <div class="topbar-link-wrapper">
+                                    <div class="header-menu-links">
+                                        <a href="/register"
+                                           class="header-link text-decoration-none text-dark font-bold">
+                                            Register
+                                        </a>
+                                    </div>
+                                    <div class="header-menu-links">
+                                        or
+                                        <a href="/login" class="header-link text-decoration-none text-dark font-bold">
+                                            Login
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <a class="whislist-counter" href="{{route('get.wishlist')}}">
                                 <div class="whislist-label"></div>
                             </a>
-                        </div>
-                                    @else
-                            <div class="topbar-link">
-                                <a  href="/login">
-                                    <div class="topbar-link-toggle "></div>
-                                </a>
-                                <div class="topbar-link-wrapper">
-                                        <div class="header-menu-links">
-                                            <a href="/register" class="header-link text-decoration-none text-dark font-bold">
-                                                Register
-                                            </a>
-                                        </div>
-                                        <div class="header-menu-links">
-                                            or
-                                            <a href="/login" class="header-link text-decoration-none text-dark font-bold">
-                                                Login
-                                            </a>
-                                        </div>
                     </div>
-                </div>
-                <a class="whislist-counter" href="{{route('get.wishlist')}}">
-                    <div class="whislist-label"></div>
-                </a>
-            </div>
-                                    @endif
+                    @endif
 
 
+                    <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
 
-
-
-                        <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
-
-                            <div class="items-cart-inner">
-                                <div class="basket">
-                               <i class="glyphicon glyphicon-shopping-cart" ></i>
-                                </div>
-                                <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
-                                <div class="total-price-basket"> <span class="lbl">Cart-</span>
-                                    <span class="total-price"> <span class="sign"></span>
-                <span class="value" id="cartSubTotal"></span> </span> </div>
+                        <div class="items-cart-inner">
+                            <div class="basket">
+                                <i class="glyphicon glyphicon-shopping-cart"></i>
                             </div>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <!--   // Mini Cart Start with Ajax -->
+                            <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
+                            <div class="total-price-basket"><span class="lbl">Cart-</span>
+                                <span class="total-price"> <span class="sign"></span>
+                <span class="value" id="cartSubTotal"></span> </span></div>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <!--   // Mini Cart Start with Ajax -->
 
-                                <div id="miniCart">
+                            <div id="miniCart">
 
-                                </div>
+                            </div>
 
-                                <!--   // End Mini Cart Start with Ajax -->
+                            <!--   // End Mini Cart Start with Ajax -->
 
 
-                                <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Sub Total:</span>
-                                        <span class='price'  id="cartSubTotal">  </span> </div>
-                                    <div class="clearfix"></div>
-                                    <a href="{{route('mycart')}}" class="btn btn-upper btn-primary btn-block m-t-20">View my cart</a>
-                                    <a href="{{route('checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
-                                <!-- /.cart-total-->
+                            <div class="clearfix cart-total">
+                                <div class="pull-right"><span class="text">Sub Total:</span>
+                                    <span class='price' id="cartSubTotal">  </span></div>
+                                <div class="clearfix"></div>
+                                <a href="{{route('mycart')}}" class="btn btn-upper btn-primary btn-block m-t-20">View my
+                                    cart</a>
+                                <a href="{{route('checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+                            </div>
+                            <!-- /.cart-total-->
 
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-menu-->
-                    </div>
-                    <!-- /.dropdown-cart -->
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-menu-->
+                </div>
+                <!-- /.dropdown-cart -->
 
-                    <!-- == === SHOPPING CART DROPDOWN : END=== === --> </div>
+                <!-- == === SHOPPING CART DROPDOWN : END=== === --> </div>
 
-                <!-- /.top-cart-row -->
-            </div>
-            <!-- /.row -->
-
+            <!-- /.top-cart-row -->
         </div>
-        <!-- /.container -->
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
 
     </div>
     <!-- /.main-header -->
@@ -147,26 +152,89 @@
         <div class="container">
             <div class="yamm navbar navbar-default" role="navigation">
                 <div class="navbar-header">
-                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse"
+                            class="navbar-toggle collapsed" type="button">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                                class="icon-bar"></span> <span class="icon-bar"></span></button>
                 </div>
                 <div class="nav-bg-class">
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
-                                <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
-                                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Shop</a>
+                                <li class="active dropdown yamm-fw"><a href="home.html" data-hover="dropdown"
+                                                                       class="dropdown-toggle" data-toggle="dropdown">Home</a>
+                                </li>
+                                @php
+
+                                    $categories = App\Models\Category::orderBy('category_name_en','ASC')->take(4)->get();
+                                    $subcat = \Illuminate\Support\Facades\DB::table('sub_categories')
+                 ->select('category_id', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
+                 ->groupBy('category_id')
+                 ->orderBy('total','DESC')
+                 -> take(4)
+                 ->get();
+
+
+                                @endphp
+                                @foreach($subcat as $cat)
+                                    @php
+                                        $category = \App\Models\Category::findOrFail($cat-> category_id);
+                                    @endphp
+                                    <li class="dropdown yamm mega-menu"><a href="home.html" data-hover="dropdown"
+                                                                           class="dropdown-toggle"
+                                                                           data-toggle="dropdown">{{$category-> category_name_en}}</a>
+                                        <ul class="dropdown-menu container">
+                                            <li>
+                                                <div class="yamm-content ">
+                                                    <div class="row">
+                                                        @php
+                                                            $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
+                                                        @endphp
+                                                        @foreach($subcategories as $subcategory)
+                                                            <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                                                                <a href="{{ url('subcategory/product/'.$subcategory->id) }}">
+                                                                    <h2 class="title">{{ $subcategory->subcategory_name_en }}</h2></a>
+                                                                <ul class="links">
+                                                                    @php
+                                                                        $subsubcategories = App\Models\SubSubCategory::where('subcategory_id',$subcategory->id)->orderBy('subsubcategory_name_en','ASC')->get();
+                                                                    @endphp
+                                                                    @foreach($subsubcategories as $subsubcategory)
+                                                                        <li>
+                                                                            <a href="{{ url('subsubcategory/product/'.$subsubcategory->id) }}"> {{ $subsubcategory->subsubcategory_name_en }}</a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        @endforeach
+                                                        <!-- /.col -->
+
+
+                                                        <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image">
+                                                            <img class="img-responsive"
+                                                                 src="{{asset($category-> category_icon)}}" alt="">
+                                                        </div>
+                                                        <!-- /.yamm-content -->
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endforeach
+
+                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-hover="dropdown"
+                                                        data-toggle="dropdown">Blog</a>
                                     <ul class="dropdown-menu pages">
                                         <li>
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-xs-12 col-menu">
+                                                        @php
+                                                        $blogs = \App\Models\BlogPostCategories::orderBy('blog_category_name_en','ASC')-> get();
+                                                                @endphp
                                                         <ul class="links">
-                                                            <li><a href="home.html">Home</a></li>
-                                                            <li><a href="category.html">Category</a></li>
-                                                            <li><a href="detail.html">Detail</a></li>
-                                                            <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
-
+                                                            @foreach($blogs as $blog)
+                                                            <li><a href="blog.html">{{$blog->blog_category_name_en}}</a></li>
+                                                            @endforeach
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -174,130 +242,12 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Blog</a>
-                                    <ul class="dropdown-menu pages">
-                                        <li>
-                                            <div class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-menu">
-                                                        <ul class="links">
-                                                            <li><a href="home.html">Home</a></li>
-                                                            <li><a href="category.html">Category</a></li>
-                                                            <li><a href="detail.html">Detail</a></li>
-                                                            <li><a href="shopping-cart.html">Shopping Cart Summary</a></li>
-                                                            <li><a href="checkout.html">Checkout</a></li>
-                                                            <li><a href="blog.html">Blog</a></li>
-                                                            <li><a href="blog-details.html">Blog Detail</a></li>
-
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Media<span class="menu-label new-menu hidden-xs">new</span></a>
-                                    <ul class="dropdown-menu container">
-                                        <li>
-                                            <div class="yamm-content ">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <h2 class="title">Gallery</h2>
-                                                        <ul class="links">
-                                                            <li><a href="#">Dresses</a></li>
-                                                            <li><a href="#">Shoes </a></li>
-                                                            <li><a href="#">Jackets</a></li>
-                                                            <li><a href="#">Sunglasses</a></li>
-                                                            <li><a href="#">Sport Wear</a></li>
-                                                            <li><a href="#">Blazers</a></li>
-                                                            <li><a href="#">Shirts</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- /.col -->
-
-                                                    <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <h2 class="title">Portfolio</h2>
-                                                        <ul class="links">
-                                                            <li><a href="#">Handbags</a></li>
-                                                            <li><a href="#">Jwellery</a></li>
-                                                            <li><a href="#">Swimwear </a></li>
-                                                            <li><a href="#">Tops</a></li>
-                                                            <li><a href="#">Flats</a></li>
-                                                            <li><a href="#">Shoes</a></li>
-                                                            <li><a href="#">Winter Wear</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- /.col -->
-                                                    <!-- /.col -->
-
-                                                    <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image"> <img class="img-responsive" src="{{asset('frontend/assets/images/banners/top-menu-banner.jpg')}}" alt=""> </div>
-                                                    <!-- /.yamm-content -->
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown mega-menu">
-                                    <a href="category.html"  data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Shortcode <span class="menu-label hot-menu hidden-xs">hot</span> </a>
-                                    <ul class="dropdown-menu container">
-                                        <li>
-                                            <div class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-menu">
-                                                        <h2 class="title">Shortcode Page</h2>
-                                                        <ul class="links">
-                                                            <li><a href="#">Gaming</a></li>
-                                                            <li><a href="#">Laptop Skins</a></li>
-                                                            <li><a href="#">Apple</a></li>
-                                                            <li><a href="#">Dell</a></li>
-                                                            <li><a href="#">Lenovo</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- /.col -->
-
-                                                    <div class="col-xs-12 col-sm-12 col-md-2 col-menu">
-                                                        <h2 class="title">Shortcode Page</h2>
-                                                        <ul class="links">
-                                                            <li><a href="#">Routers & Modems</a></li>
-                                                            <li><a href="#">CPUs, Processors</a></li>
-                                                            <li><a href="#">PC Gaming Store</a></li>
-                                                            <li><a href="#">Graphics Cards</a></li>
-
-                                                        </ul>
-                                                    </div>
-                                                    <!-- /.col -->
+                                <li class="dropdown hidden-sm"><a href="category.html">About Us </a></li>
+                                <li class="dropdown hidden-sm"><a href="category.html">Contact Us</a></li>
 
 
-                                                    <div class="col-xs-12 col-sm-12 col-md-4 col-menu custom-banner"> <a href="#"><img alt="" src="assets/images/banners/banner-side.png"></a> </div>
-                                                </div>
-                                                <!-- /.row -->
-                                            </div>
-                                            <!-- /.yamm-content --> </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</a>
-                                    <ul class="dropdown-menu pages">
-                                        <li>
-                                            <div class="yamm-content">
-                                                <div class="row">
-                                                    <div class="col-xs-12 col-menu">
-                                                        <ul class="links">
-                                                            <li><a href="home.html">FAQs</a></li>
-                                                            <li><a href="category.html">Sitemap</a></li>
-                                                            <li><a href="detail.html">Typography</a></li>
-
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown hidden-sm"> <a href="category.html">About Us </a> </li>
-                                <li class="dropdown hidden-sm"> <a href="category.html">Contact Us</a> </li>
-
-
-                                <li class="dropdown  navbar-right special-menu"> <a href="#">Call Us : {{$setting-> phone_one}}</a> </li>
+                                <li class="dropdown  navbar-right special-menu"><a href="#">Call Us
+                                        : {{$setting-> phone_one}}</a> </li>
                             </ul>
                             <!-- /.navbar-nav -->
                             <div class="clearfix"></div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CheckoutController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\Payment\CashController;
 use App\Http\Controllers\Backend\Payment\StripeController;
 use App\Http\Controllers\Backend\ShippingAreaController;
@@ -166,7 +167,40 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
 
+    Route::prefix('orders')->group(function(){
 
+        Route::get('/pending/orders', [OrderController::class, 'PendingOrders'])->name('pending-orders');
+
+        Route::get('/pending/orders/details/{order_id}', [OrderController::class, 'PendingOrdersDetails'])->name('pending.order.details');
+
+        Route::get('/confirmed/orders', [OrderController::class, 'ConfirmedOrders'])->name('confirmed-orders');
+
+        Route::get('/processing/orders', [OrderController::class, 'ProcessingOrders'])->name('processing-orders');
+
+        Route::get('/picked/orders', [OrderController::class, 'PickedOrders'])->name('picked-orders');
+
+        Route::get('/shipped/orders', [OrderController::class, 'ShippedOrders'])->name('shipped-orders');
+
+        Route::get('/delivered/orders', [OrderController::class, 'DeliveredOrders'])->name('delivered-orders');
+
+        Route::get('/cancel/orders', [OrderController::class, 'CancelOrders'])->name('cancel-orders');
+
+// Update Status
+        Route::get('/pending/confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending-confirm');
+
+        Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
+
+        Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing.picked');
+
+        Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked.shipped');
+
+        Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped.delivered');
+
+        Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
+
+
+
+    });
 
 
 });
@@ -201,9 +235,16 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:web']], function () {
     Route::get('/order_detail/{order_id}', [UserOrderController::class, 'OrderDetails']);
     Route::get('/return/order/list', [UserOrderController::class, 'ReturnOrderList'])->name('return.order.list');
     Route::get('/cancel/orders', [UserOrderController::class, 'CancelOrders'])->name('cancel.orders');
+    Route::get('/invoice_download/{order_id}', [UserOrderController::class, 'InvoiceDownload']);
+
 
 });
-
+//get list product
+Route::get('/list/product/{cat_id}', [HomeController::class, 'ListProduct'])->name('list.product');
+// Frontend SubCategory wise Data
+Route::get('/subcategory/product/{subcat_id}', [HomeController::class, 'SubCatWiseProduct']);
+// Frontend Sub-SubCategory wise Data
+Route::get('/subsubcategory/product/{subsubcat_id}', [HomeController::class, 'SubSubCatWiseProduct']);
 // Add to Cart Store Data
 Route::get('/add/cart/{id}', [CartController::class, 'AddToCart'])->name('add.toCart');
 

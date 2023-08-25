@@ -10,11 +10,11 @@
                 </div>
 
                 <div class="col-md-8">
-
+                    <div class="box-body">
                     <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
-                            <tbody>
 
+                            <thead>
                             <tr style="background: #e2e2e2;">
                                 <td class="col-md-1">
                                     <label for=""> Date</label>
@@ -42,8 +42,9 @@
                                 </td>
 
                             </tr>
+                            </thead>
 
-
+                            <tbody>
                             @foreach($orders as $order)
                                 <tr>
                                     <td class="col-md-1">
@@ -68,7 +69,7 @@
 
                                             @if($order->status == 'pending')
                                                 <span class="badge badge-pill badge-warning" style="background: #800080;"> Pending </span>
-                                            @elseif($order->status == 'confirm')
+                                            @elseif($order->status == 'confirmed')
                                                 <span class="badge badge-pill badge-warning" style="background: #0000FF;"> Confirm </span>
 
                                             @elseif($order->status == 'processing')
@@ -98,7 +99,9 @@
                                     <td class="col-md-1">
                                         <a href="{{ url('user/order_detail/'.$order->id ) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
 
-{{--                                        <a target="_blank" href="{{ url('user/invoice_download/'.$order->id ) }}" class="btn btn-sm btn-danger" style="margin-top: 5px;"><i class="fa fa-download" style="color: white;"></i> Invoice </a>--}}
+                                        <a target="_blank" href="{{ url('user/invoice_download/'.$order->id ) }}"
+                                           class="btn btn-sm btn-danger" style="margin-top: 5px;"><i
+                                                class="fa fa-download" style="color: white;"></i> Invoice </a>
 
                                     </td>
 
@@ -113,6 +116,7 @@
 
                         </table>
 
+                    </div>
                     </div>
 
 
