@@ -15,73 +15,130 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     //
-    public function ProductViewAjax($id){
-        $product = Product::with('category','brand') -> findOrFail($id);
-        $color = $product-> product_color_en;
-        $product_color = explode(',',$color);
-        $size = $product-> product_size_en;
-        $product_size = explode(',',$size);
-        return response()-> json(array(
-           'product' => $product,
-           'color' => $product_color,
-           'size' =>  $product_size,
+    public function ProductViewAjax($id)
+    {
+        $product = Product::with('category', 'brand')->findOrFail($id);
+        $color = $product->product_color_en;
+        $product_color = explode(',', $color);
+        $size = $product->product_size_en;
+        $product_size = explode(',', $size);
+        return response()->json(array(
+            'product' => $product,
+            'color' => $product_color,
+            'size' => $product_size,
         ));
 
     }
-    public function ProductDetail($id){
+
+    public function ProductDetail($id)
+    {
         $product = Product::findOrFail($id);
-        $multiImag = MultiImg::where('product_id',$id)-> get();
-        $product_color_en = explode(',',$product-> product_color_en);
-        $product_size_en= explode(',',$product-> product_size_en);
-        $relatedProduct = Product::where('category_id',$product-> category_id)-> where('id','!=',$id)-> get();
-        $reviewcount = Review::where('product_id',$product->id)->where('status',1)->latest()->get();
-        $avarage = Review::where('product_id',$product->id)->where('status',1)->avg('rating');
-        $reviews = Review::where('product_id',$product->id)->latest()->limit(5)->get();
+        $multiImag = MultiImg::where('product_id', $id)->get();
+        $product_color_en = explode(',', $product->product_color_en);
+        $product_size_en = explode(',', $product->product_size_en);
+        $relatedProduct = Product::where('category_id', $product->category_id)->where('id', '!=', $id)->get();
+        $reviewcount = Review::where('product_id', $product->id)->where('status', 1)->latest()->get();
+        $avarage = Review::where('product_id', $product->id)->where('status', 1)->avg('rating');
+        $reviews = Review::where('product_id', $product->id)->latest()->limit(5)->get();
 
 
-        return view('frontend.product.product_detail',compact('product','multiImag','product_color_en','product_size_en','relatedProduct','reviewcount','avarage','reviews'));
+        return view('frontend.product.product_detail', compact('product', 'multiImag', 'product_color_en', 'product_size_en', 'relatedProduct', 'reviewcount', 'avarage', 'reviews'));
     }
-    public function UserLogout(){
+
+    public function UserLogout()
+    {
         Auth::logout();
         return Redirect()->route('login');
     }
-
-    public function ListProduct($cat_id){
-        if($cat_id==0){
-            $products = Product::latest()-> where('status',1)->orderBy('id','DESC')->get();
-            return view('frontend.product.list_product_byCategory',compact('products'));
-        }else {
-            $products = Product::latest()->where('status', 1)->where('category_id', $cat_id)->orderBy('id', 'DESC')->get();
-            return view('frontend.product.list_product_byCategory', compact('products'));
-        }
-    }
-    public function SubCatWiseProduct(Request $request, $subcat_id){
-        $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(3);
-        $categories = Category::orderBy('category_name_en','ASC')->get();
-
-        $breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
+    public function AllProduct(Request $request){
+        $products = Product::where('status', 1)->paginate(3);
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
 
         ///  Load More Product with Ajax
         if ($request->ajax()) {
-            $grid_view = view('frontend.product.grid_view_product',compact('products'))->render();
+            $grid_view = view('frontend.product.grid_view_product', compact('products'))->render();
 
-            $list_view = view('frontend.product.list_view_product',compact('products'))->render();
-            return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);
+            $list_view = view('frontend.product.list_view_product', compact('products'))->render();
+            return response()->json(['grid_view' => $grid_view, 'list_view', $list_view]);
 
         }
         ///  End Load More Product with Ajax
 
-        return view('frontend.product.subcategory_view',compact('products','categories','breadsubcat'));
+        return view('frontend.product.all_product', compact('products', 'categories'));
+    }
+    public function ListProduct(Request $request, $cat_id)
+    {
+        $products = Product::where('status', 1)->paginate(3);
+        if ($cat_id != 0) {
+            $products = Product::where('status', 1)->where('category_id', $cat_id)->orderBy('id', 'DESC')->paginate(3);
+        }
+
+        $cat = Category::findOrFail($cat_id);
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+
+
+        ///  Load More Product with Ajax
+        if ($request->ajax()) {
+            $grid_view = view('frontend.product.grid_view_product', compact('products'))->render();
+
+            $list_view = view('frontend.product.list_view_product', compact('products'))->render();
+            return response()->json(['grid_view' => $grid_view, 'list_view', $list_view]);
+
+        }
+        ///  End Load More Product with Ajax
+
+        return view('frontend.product.list_product_byCategory', compact('products', 'categories', 'cat'));
+    }
+
+    public function SubCatWiseProduct(Request $request, $subcat_id)
+    {
+        $products = Product::where('status', 1)->where('subcategory_id', $subcat_id)->orderBy('id', 'DESC')->paginate(3);
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+
+        $breadsubcat = SubCategory::with(['category'])->where('id', $subcat_id)->get();
+
+
+        ///  Load More Product with Ajax
+        if ($request->ajax()) {
+            $grid_view = view('frontend.product.grid_view_product', compact('products'))->render();
+
+            $list_view = view('frontend.product.list_view_product', compact('products'))->render();
+            return response()->json(['grid_view' => $grid_view, 'list_view', $list_view]);
+
+        }
+        ///  End Load More Product with Ajax
+
+        return view('frontend.product.subcategory_view', compact('products', 'categories', 'breadsubcat'));
 
     }
-    public function SubSubCatWiseProduct($subsubcat_id){
-        $products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
-        $categories = Category::orderBy('category_name_en','ASC')->get();
 
-        $breadsubsubcat = SubSubCategory::with(['category','subcategory'])->where('id',$subsubcat_id)->get();
+    public function SubSubCatWiseProduct($subsubcat_id)
+    {
+        $products = Product::where('status', 1)->where('subsubcategory_id', $subsubcat_id)->orderBy('id', 'DESC')->paginate(6);
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
-        return view('frontend.product.sub_subcategory_view',compact('products','categories','breadsubsubcat'));
+        $breadsubsubcat = SubSubCategory::with(['category', 'subcategory'])->where('id', $subsubcat_id)->get();
 
+        return view('frontend.product.sub_subcategory_view', compact('products', 'categories', 'breadsubsubcat'));
+
+    }
+
+    public function ProductSearch(Request $request)
+    {
+        $request->validate(["search" => 'required']);
+        $item = $request->search;
+
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        $products = Product::where('product_name_en', 'LIKE', "%$item%")->get();
+        return view('frontend.product.search', compact('products', 'categories'));
+    }
+
+    public function SearchProduct(Request $request)
+    {
+        $request->validate(["search" => "required"]);
+        $item = $request->search;
+        $products = Product::where('product_name_en', 'LIKE', "%$item%")->select('product_name_en', 'product_thumbnail', 'id', 'product_slug_en')->limit(5)->get();
+        return view('frontend.product.search_product', compact('products'));
     }
 }

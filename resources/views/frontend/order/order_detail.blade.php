@@ -1,6 +1,9 @@
 @extends('frontend.main_master')
 @section('content')
 
+    @section('title')
+        Order Detail
+    @endsection
     <div class="body-content">
         <div class="container">
             <div class="row">
@@ -64,7 +67,7 @@
 
                 <div class="col-md-5">
                     <div class="card">
-                        <div class="card-header"><h4>Order Details | 
+                        <div class="card-header"><h4>Order Details |
                                 <span class="text-danger"> Invoice : {{ $order->invoice_no }}</span></h4>
                         </div>
                         <hr>
@@ -262,7 +265,36 @@
                         </form>
                     @else
 
-                        <span class="badge badge-pill badge-warning" style="background: red">You Have send return request for this product</span>
+                        <span class="badge badge-pill badge-warning" style="background: red">You have send return request for this product</span>
+
+                    @endif
+
+                @endif
+
+                @if($order->status !== "pending")
+
+                @else
+
+                    @php
+                        $order = App\Models\Order::where('id',$order->id)->where('cancel_reason','=',NULL)->first();
+                    @endphp
+
+
+                    @if($order)
+                        <form action="{{ route('cancel.order',$order->id) }}" method="post">
+                            @csrf
+
+                            <div class="form-group">
+                                <label for="label"> Order Cancel Reason:</label>
+                                <textarea name="cancel_reason" id="" class="form-control" cols="30" rows="05">Cancel Reason</textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger">Order Cancel</button>
+
+                        </form>
+                    @else
+
+                        <span class="badge badge-pill badge-warning" style="background: red">You have send cancel request for this product</span>
 
                     @endif
 

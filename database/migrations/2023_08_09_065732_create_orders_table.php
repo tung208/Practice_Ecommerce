@@ -38,8 +38,11 @@ return new class extends Migration
             $table->string('shipped_date')->nullable();
             $table->string('delivered_date')->nullable();
             $table->string('cancel_date')->nullable();
+            $table->string('cancel_reason')->nullable();
+            $table->integer('cancel_status')->nullable();
             $table->string('return_date')->nullable();
             $table->string('return_reason')->nullable();
+            $table->integer('return_status')->nullable();
             $table->string('status');
             $table->timestamps();
         });

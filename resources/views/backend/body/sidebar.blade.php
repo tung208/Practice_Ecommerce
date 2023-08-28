@@ -1,7 +1,7 @@
 @php
     $prefix = Request::route()->getPrefix();
     $route = Route::current()->getName();
-
+$logo = \App\Models\SiteSetting::latest() -> find(1);
 @endphp
 
 
@@ -14,8 +14,8 @@
                 <a href="index.html">
                     <!-- logo for regular state and mobile devices -->
                     <div class="d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
-                        <h3><b>Easy</b> Shop</h3>
+                        <img src="{{ asset($logo-> logo) }}" alt="">
+                        <h3><b>Shopping</b> Online</h3>
                     </div>
                 </a>
             </div>
@@ -509,7 +509,8 @@
 
                     <li class="{{ ($route == 'delivered-orders')? 'active':'' }}"><a href="{{ route('delivered-orders') }}"><i class="ti-more"></i> Delivered Orders</a></li>
 
-                    <li class="{{ ($route == 'cancel-orders')? 'active':'' }}"><a href="{{ route('cancel-orders') }}"><i class="ti-more"></i> Cancel Orders</a></li>
+                    <li class="{{ ($route == 'cancel.request')? 'active':'' }}"><a href="{{ route('cancel.request') }}"><i class="ti-more"></i> Cancel Orders</a></li>
+                    <li class="{{ ($route == 'return.request')? 'active':'' }}"><a href="{{ route('return.request') }}"><i class="ti-more"></i>Return Request</a></li>
 
 
 

@@ -201,6 +201,25 @@ Route::middleware(['auth:admin'])->group(function () {
 
 
     });
+    Route::prefix('return')->group(function(){
+
+        Route::get('/request', [OrderController::class, 'ReturnRequest'])->name('return.request');
+
+        Route::get('/admin/return/approve/{order_id}', [OrderController::class, 'ReturnRequestApprove'])->name('return.approve');
+
+
+
+    });
+    Route::prefix('cancel')->group(function(){
+
+        Route::get('/request', [OrderController::class, 'CancelRequest'])->name('cancel.request');
+
+        Route::get('/admin/return/approve/{order_id}', [OrderController::class, 'CancelRequestApprove'])->name('cancel.approve');
+
+
+
+    });
+
 
 
 });
@@ -232,14 +251,22 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:web']], function () {
     Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
 
     Route::get('/my/orders', [UserOrderController::class, 'MyOrders'])->name('my.orders');
-    Route::get('/order_detail/{order_id}', [UserOrderController::class, 'OrderDetails']);
+    Route::get('/order_detail/{order_id}', [UserOrderController::class, 'OrderDetails'])-> name('order.detail');
     Route::get('/return/order/list', [UserOrderController::class, 'ReturnOrderList'])->name('return.order.list');
     Route::get('/cancel/orders', [UserOrderController::class, 'CancelOrders'])->name('cancel.orders');
     Route::get('/invoice_download/{order_id}', [UserOrderController::class, 'InvoiceDownload']);
 
+    Route::post('/return/order/{order_id}', [UserOrderController::class, 'ReturnOrder'])->name('return.order');
+
+    Route::get('/return/order/list', [UserOrderController::class, 'ReturnOrderList'])->name('return.order.list');
+
+    Route::post('/cancel/order/{order_id}', [UserOrderController::class, 'CancelOrder'])->name('cancel.order');
+    Route::get('/cancel/orders', [UserOrderController::class, 'CancelOrdersList'])->name('cancel.orders.list');
+
 
 });
 //get list product
+Route::get('/all/product', [HomeController::class, 'AllProduct'])->name('all.product');
 Route::get('/list/product/{cat_id}', [HomeController::class, 'ListProduct'])->name('list.product');
 // Frontend SubCategory wise Data
 Route::get('/subcategory/product/{subcat_id}', [HomeController::class, 'SubCatWiseProduct']);
@@ -261,7 +288,11 @@ Route::get('/my-cart', [CartPageController::class, 'MyCart'])->name('mycart');
 Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);
 Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement']);
 
-// Checkout Routes
+/// Product Search Route
+Route::post('/search', [HomeController::class, 'ProductSearch'])->name('product.search');
+
+// Advance Search Routes
+Route::post('search-product', [HomeController::class, 'SearchProduct']);
 
 
 

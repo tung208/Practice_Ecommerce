@@ -5,9 +5,9 @@
 			<a class="nav-link" href="javascript:void(0)">FAQ</a>
 		  </li>
 		  <li class="nav-item">
-			<a class="nav-link" href="#">www.easylearningbd.com</a>
+			<a class="nav-link" href="#">Nguyen Thanh Tung</a>
 		  </li>
 		</ul>
     </div>
-	  &copy; 2020 <a href="#">Easy Shop</a>. All Rights Reserved.
+	  &copy; 2023 <a href="#">NetKo Solution</a>. All Rights Reserved.
   </footer>

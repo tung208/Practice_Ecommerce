@@ -1,6 +1,9 @@
 @extends('frontend.main_master')
 @section('content')
 
+    @section('title')
+       Order List
+    @endsection
     <div class="body-content">
         <div class="container">
             <div class="row">
@@ -84,7 +87,7 @@
                                             @elseif($order->status == 'delivered')
                                                 <span class="badge badge-pill badge-warning" style="background: #008000;"> Delivered </span>
 
-                                                @if($order->return_order == 1)
+                                                @if($order->return_status == 1)
                                                     <span class="badge badge-pill badge-warning" style="background:red;">Return Requested </span>
 
                                                 @endif

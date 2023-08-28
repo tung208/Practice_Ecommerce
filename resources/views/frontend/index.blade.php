@@ -29,7 +29,7 @@
                                             <div class="excerpt fadeInDown-2 hidden-xs"><span>{{$slider-> title}}</span>
                                             </div>
                                             <div class="button-holder fadeInDown-3"><a
-                                                    href="{{route('list.product',0)}}"
+                                                    href="{{route('all.product')}}"
                                                     class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop
                                                     Now</a></div>
                                         </div>
@@ -72,7 +72,8 @@
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"><a href="{{route('list.product',$item->id)}}"><img
+                                                            <div class="image"><a
+                                                                    href="{{route('list.product',$item->id)}}"><img
                                                                         src="{{$item -> category_icon}}" alt=""></a>
                                                             </div>
                                                             <!-- /.image -->
@@ -131,7 +132,8 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"><a href="{{route('product.detail',$product -> id)}}"><img
+                                                        <div class="image"><a
+                                                                href="{{route('product.detail',$product -> id)}}"><img
                                                                     src="{{$product-> product_thumbnail}}" alt=""></a>
                                                         </div>
                                                         <!-- /.image -->
@@ -204,9 +206,10 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="wide-banner cnt-strip">
-                                            <div class="image"><img class="img-responsive"
-                                                                    src="{{asset('upload/products/banner2.png')}}"
-                                                                    alt=""></div>
+                                            <div class="image"><a href="{{route('all.product')}}"><img
+                                                        class="img-responsive"
+                                                        src="{{asset('upload/products/banner2.png')}}"
+                                                        alt=""></a></div>
 
                                             <div class="new-label">
                                                 <div class="text">NEW</div>
@@ -217,9 +220,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="wide-banner cnt-strip">
-                                            <div class="image"><img class="img-responsive"
-                                                                    src="{{asset('upload/products/banner1.png')}}"
-                                                                    alt=""></div>
+                                            <div class="image"><a href="{{route('all.product')}}"><img
+                                                        class="img-responsive"
+                                                        src="{{asset('upload/products/banner1.png')}}"
+                                                        alt=""></a></div>
                                             {{--                                    <div class="strip strip-text">--}}
                                             {{--                                        <div class="strip-inner">--}}
                                             {{--                                            <h2 class="text-right">New Mens Fashion<br>--}}
@@ -253,7 +257,8 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"><a href="{{route('product.detail',$product -> id)}}"><img
+                                                        <div class="image"><a
+                                                                href="{{route('product.detail',$product -> id)}}"><img
                                                                     src="{{$product-> product_thumbnail}}" alt=""></a>
                                                         </div>
                                                         <!-- /.image -->
@@ -398,7 +403,8 @@
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"><a href="{{route('product.detail',$product -> id)}}"><img
+                                                        <div class="image"><a
+                                                                href="{{route('product.detail',$product -> id)}}"><img
                                                                     src="{{$product-> product_thumbnail}}" alt=""></a>
                                                         </div>
                                                         <!-- /.image -->

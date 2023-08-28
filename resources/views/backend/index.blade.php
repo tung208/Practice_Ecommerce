@@ -1,19 +1,19 @@
 @extends('backend.admin_master')
 @section('admin')
 
-{{--@php--}}
-{{--	$date = date('d-m-y');--}}
-{{--	$today = App\Models\Order::where('order_date',$date)->sum('amount');--}}
+@php
+	$date = date('d-m-y');
+	$today = App\Models\Order::where('order_date',$date)->sum('amount');
 
-{{--	$month = date('F');--}}
-{{--	$month = App\Models\Order::where('order_month',$month)->sum('amount');--}}
+	$month = date('F');
+	$month = App\Models\Order::where('order_month',$month)->sum('amount');
 
-{{--    $year = date('Y');--}}
-{{--	$year = App\Models\Order::where('order_year',$year)->sum('amount');--}}
+    $year = date('Y');
+	$year = App\Models\Order::where('order_year',$year)->sum('amount');
 
-{{--    $pending = App\Models\Order::where('status','pending')->get();--}}
+    $pending = App\Models\Order::where('status','pending')->get();
 
-{{--@endphp --}}
+@endphp
 <div class="container-full">
 
 		<!-- Main content -->
@@ -27,7 +27,7 @@
 		</div>
 		<div>
 			<p class="text-mute mt-20 mb-0 font-size-16">Today's Sale</p>
-			<h3 class="text-white mb-0 font-weight-500">$999 <small class="text-success"><i class="fa fa-caret-up"></i> Usd</small></h3>
+			<h3 class="text-white mb-0 font-weight-500">{{ $today  }} <small class="text-success"><i class="fa fa-caret-up"></i> Usd</small></h3>
 		</div>
 	</div>
 </div>
@@ -40,7 +40,7 @@
 		</div>
 		<div>
 			<p class="text-mute mt-20 mb-0 font-size-16">Monthly Sale </p>
-			<h3 class="text-white mb-0 font-weight-500">$999 <small class="text-success"><i class="fa fa-caret-up"></i> Usd</small></h3>
+			<h3 class="text-white mb-0 font-weight-500">{{ $month }} <small class="text-success"><i class="fa fa-caret-up"></i> Usd</small></h3>
 		</div>
 	</div>
 </div>
@@ -53,7 +53,7 @@
 		</div>
 		<div>
 			<p class="text-mute mt-20 mb-0 font-size-16">Yearly Sale </p>
-			<h3 class="text-white mb-0 font-weight-500">$999 <small class="text-danger"><i class="fa fa-caret-down"></i> Usd</small></h3>
+			<h3 class="text-white mb-0 font-weight-500">${{ $year }} <small class="text-danger"><i class="fa fa-caret-down"></i> Usd</small></h3>
 		</div>
 	</div>
 </div>
@@ -66,7 +66,7 @@
 		</div>
 		<div>
 			<p class="text-mute mt-20 mb-0 font-size-16">Pending Orders </p>
-			<h3 class="text-white mb-0 font-weight-500">99 <small class="text-danger"><i class="fa fa-caret-up"></i> Order </small></h3>
+			<h3 class="text-white mb-0 font-weight-500">{{ count($pending) }} <small class="text-danger"><i class="fa fa-caret-up"></i> Order </small></h3>
 		</div>
 	</div>
 </div>
@@ -82,7 +82,10 @@
 		</h4>
 	</div>
 
+    @php
+        $orders = App\Models\Order::where('status','pending')->orderBy('id','DESC')->get();
 
+    @endphp
 
 	<div class="box-body">
 		<div class="table-responsive">
@@ -99,25 +102,25 @@
 </tr>
 				</thead>
 				<tbody>
-
+                @foreach($orders as $item)
 
 		<tr>
 			<td class="pl-0 py-8">
 				 <span class="text-white font-weight-600 d-block font-size-16">
-					xx
+				{{ Carbon\Carbon::parse($item->order_date)->diffForHumans()  }}
 				</span>
 			</td>
 
 			<td>
 
 				<span class="text-white font-weight-600 d-block font-size-16">
-					xx
+				{{ $item->invoice_no }}
 				</span>
 			</td>
 
 			<td>
 				<span class="text-fade font-weight-600 d-block font-size-16">
-					$ xx
+					$ {{ $item->amount }}
 				</span>
 
 			</td>
@@ -125,19 +128,19 @@
 			<td>
 
 				<span class="text-white font-weight-600 d-block font-size-16">
-					xx
+					{{ $item->payment_method }}
 				</span>
 			</td>
 			<td>
-				<span class="badge badge-primary-light badge-lg">xx</span>
+				<span class="badge badge-primary-light badge-lg">{{ $item->status }}</span>
 			</td>
 
 			<td class="text-right">
-				<a href="#" class="waves-effect waves-light btn btn-info btn-circle mx-5"><span class="mdi mdi-bookmark-plus"></span></a>
-				<a href="#" class="waves-effect waves-light btn btn-info btn-circle mx-5"><span class="mdi mdi-arrow-right"></span></a>
+
+				<a href="{{route('pending.order.details',$item->id)}}" class="waves-effect waves-light btn btn-info btn-circle mx-5"><span class="mdi mdi-arrow-right"></span></a>
 			</td>
 		</tr>
-
+                @endforeach
 
 
 
