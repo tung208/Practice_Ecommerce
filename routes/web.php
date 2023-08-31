@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CartPageController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\UserBlogController;
 use App\Http\Controllers\Frontend\UserOrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.index');
 });
-
+Route::middleware([
+    'auth:web',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('web/dashboard', function () {
+        return view('dashboard');
+    })->name('user.dashboard');
+});
+Route::get('/user/logout', [HomeController::class, 'UserLogout'])->name('user.logout');
+Route::middleware([
+    'auth:admin',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('backend.index');
+    })->name('dashboard')->middleware('auth:admin');
+});
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
     Route::get('/login', [AdminController::class, 'loginForm']);
@@ -38,15 +57,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function ()
 
 Route::middleware(['auth:admin'])->group(function () {
 
-    Route::middleware([
-        'auth:sanctum,admin',
-        config('jetstream.auth_session'),
-        'verified',
-    ])->group(function () {
-        Route::get('/admin/dashboard', function () {
-            return view('backend.index');
-        })->name('dashboard')->middleware('auth:admin');
-    });
 
     Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
     Route::get('/admin/changePassword', [\App\Http\Controllers\Backend\AdminProfileController::class, 'changePassword'])->name('admin.changePassword');
@@ -291,19 +301,19 @@ Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement
 /// Product Search Route
 Route::post('/search', [HomeController::class, 'ProductSearch'])->name('product.search');
 
+Route::get('/filer-price', [HomeController::class, 'PriceFilter'])->name('filter.price');
+Route::get('/filter-products', [HomeController::class,'filterProducts'])->name('filter.products');
+
 // Advance Search Routes
 Route::post('search-product', [HomeController::class, 'SearchProduct']);
 
+//  Frontend Blog Show Routes
+
+Route::get('/blog', [UserBlogController::class, 'AddBlogPost'])->name('home.blog');
+
+Route::get('/post/details/{id}', [UserBlogController::class, 'DetailsBlogPost'])->name('post.details');
+
+Route::get('/blog/category/post/{category_id}', [UserBlogController::class, 'HomeBlogCatPost'])-> name('blog.cat');
 
 
 
-Route::middleware([
-    'auth:sanctum,web',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('web/dashboard', function () {
-        return view('dashboard');
-    })->name('user.dashboard');
-});
-Route::get('/user/logout', [HomeController::class, 'UserLogout'])->name('user.logout');

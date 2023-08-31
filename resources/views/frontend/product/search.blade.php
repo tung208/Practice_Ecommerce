@@ -31,8 +31,6 @@
                     <!-- = ==== TOP NAVIGATION : END === ===== -->
 
 
-
-
                     <div class="sidebar-module-container">
                         <div class="sidebar-filter">
 
@@ -51,11 +49,9 @@
                 <div class='col-md-9'>
 
 
-
-
-
-                    <h4><b>Total Search </b><span class="badge badge-danger" style="background: #FF0000;"> {{ count($products) }} </span> Items  </h4>
-
+                    <h4><b>Total Search </b><span class="badge badge-danger"
+                                                  style="background: #FF0000;"> {{ count($products) }} </span> Items
+                    </h4>
 
 
                     <div class="clearfix filters-container m-t-10">
@@ -63,37 +59,49 @@
                             <div class="col col-sm-6 col-md-2">
                                 <div class="filter-tabs">
                                     <ul id="filter-tabs" class="nav nav-tabs nav-tab-box nav-tab-fa-icon">
-                                        <li class="active"> <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>Grid</a> </li>
-                                        <li><a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>List</a></li>
+                                        <li class="active"><a data-toggle="tab" href="#grid-container"><i
+                                                    class="icon fa fa-th-large"></i>Grid</a></li>
+                                        <li><a data-toggle="tab" href="#list-container"><i
+                                                    class="icon fa fa-th-list"></i>List</a></li>
                                     </ul>
                                 </div>
                                 <!-- /.filter-tabs -->
                             </div>
                             <!-- /.col -->
+
                             <div class="col col-sm-12 col-md-6">
                                 <div class="col col-sm-3 col-md-6 no-padding">
-                                    <div class="lbl-cnt"> <span class="lbl">Sort by</span>
+                                    <form id="sortForm" method="get" action="{{route('filter.products')}}">
+                                    <div class="lbl-cnt"><span class="lbl">Sort by</span>
                                         <div class="fld inline">
                                             <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                                <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
-                                                <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">position</a></li>
-                                                    <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                                                    <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                                                    <li role="presentation"><a href="#">Product Name:A to Z</a></li>
+                                                <button data-toggle="dropdown" type="button"
+                                                        class="btn dropdown-toggle"> Position <span
+                                                        class="caret"></span></button>
+                                                <ul role="menu" class="dropdown-menu" >
+                                                    <li role="presentation" data-sort="price_lowest"><a href="#">Price:Lowest
+                                                            first</a></li>
+                                                    <li role="presentation" data-sort="price_highest"><a href="#">Price:Highest
+                                                            first</a></li>
+                                                    <li role="presentation" data-sort="name_a_to_z"><a href="#">Product
+                                                            Name:A to Z</a></li>
                                                 </ul>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="sort_by" id="sortOptionInput" value="">
                                         <!-- /.fld -->
                                     </div>
+                                    </form>
                                     <!-- /.lbl-cnt -->
                                 </div>
                                 <!-- /.col -->
                                 <div class="col col-sm-3 col-md-6 no-padding">
-                                    <div class="lbl-cnt"> <span class="lbl">Show</span>
+                                    <div class="lbl-cnt"><span class="lbl">Show</span>
                                         <div class="fld inline">
                                             <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                                <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1 <span class="caret"></span> </button>
+                                                <button data-toggle="dropdown" type="button"
+                                                        class="btn dropdown-toggle"> 1 <span class="caret"></span>
+                                                </button>
                                                 <ul role="menu" class="dropdown-menu">
                                                     <li role="presentation"><a href="#">1</a></li>
                                                     <li role="presentation"><a href="#">2</a></li>
@@ -133,13 +141,15 @@
                                     <div class="row">
 
 
-
                                         @foreach($products as $product)
                                             <div class="col-sm-6 col-md-4 wow fadeInUp">
                                                 <div class="products">
                                                     <div class="product">
                                                         <div class="product-image">
-                                                            <div class="image"> <a href="{{ url('product/detail/'.$product->id ) }}"><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
+                                                            <div class="image"><a
+                                                                    href="{{ url('product/detail/'.$product->id ) }}"><img
+                                                                        src="{{ asset($product->product_thumbnail) }}"
+                                                                        alt=""></a></div>
                                                             <!-- /.image -->
 
                                                             @php
@@ -151,7 +161,8 @@
                                                                 @if ($product->discount_price == NULL)
                                                                     <div class="tag new"><span>new</span></div>
                                                                 @else
-                                                                    <div class="tag hot"><span>{{ round($discount) }}%</span></div>
+                                                                    <div class="tag hot">
+                                                                        <span>{{ round($discount) }}%</span></div>
                                                                 @endif
                                                             </div>
 
@@ -160,18 +171,25 @@
                                                         <!-- /.product-image -->
 
                                                         <div class="product-info text-left">
-                                                            <h3 class="name"><a href="{{ url('product/detail/'.$product->id ) }}">
+                                                            <h3 class="name"><a
+                                                                    href="{{ url('product/detail/'.$product->id ) }}">
                                                                     {{ $product->product_name_en }} </a></h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
 
 
                                                             @if ($product->discount_price == NULL)
-                                                                <div class="product-price"> <span class="price"> ${{ $product->selling_price }} </span>   </div>
+                                                                <div class="product-price"><span
+                                                                        class="price"> ${{ $product->selling_price }} </span>
+                                                                </div>
 
                                                             @else
 
-                                                                <div class="product-price"> <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
+                                                                <div class="product-price"><span
+                                                                        class="price"> ${{ $product->discount_price }} </span>
+                                                                    <span
+                                                                        class="price-before-discount">$ {{ $product->selling_price }}</span>
+                                                                </div>
                                                             @endif
 
 
@@ -185,11 +203,22 @@
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                                                                        <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                                        <button class="btn btn-primary icon"
+                                                                                data-toggle="dropdown" type="button"><i
+                                                                                class="fa fa-shopping-cart"></i>
+                                                                        </button>
+                                                                        <button class="btn btn-primary cart-btn"
+                                                                                type="button">Add to cart
+                                                                        </button>
                                                                     </li>
-                                                                    <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                                    <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                                                    <li class="lnk wishlist"><a class="add-to-cart"
+                                                                                                href="detail.html"
+                                                                                                title="Wishlist"> <i
+                                                                                class="icon fa fa-heart"></i> </a></li>
+                                                                    <li class="lnk"><a class="add-to-cart"
+                                                                                       href="detail.html"
+                                                                                       title="Compare"> <i
+                                                                                class="fa fa-signal"></i> </a></li>
                                                                 </ul>
                                                             </div>
                                                             <!-- /.action -->
@@ -205,15 +234,6 @@
                                         @endforeach
 
 
-
-
-
-
-
-
-
-
-
                                     </div>
                                     <!-- /.row -->
                                 </div>
@@ -225,15 +245,11 @@
                             <!--            //////////////////// END Product Grid View  ////////////// -->
 
 
-
-
                             <!--            //////////////////// Product List View Start ////////////// -->
 
 
-
-                            <div class="tab-pane "  id="list-container">
+                            <div class="tab-pane " id="list-container">
                                 <div class="category-product">
-
 
 
                                     @foreach($products as $product)
@@ -243,36 +259,59 @@
                                                     <div class="row product-list-row">
                                                         <div class="col col-sm-4 col-lg-4">
                                                             <div class="product-image">
-                                                                <div class="image"> <img src="{{ asset($product->product_thumbnail) }}" alt=""> </div>
+                                                                <div class="image"><img
+                                                                        src="{{ asset($product->product_thumbnail) }}"
+                                                                        alt=""></div>
                                                             </div>
                                                             <!-- /.product-image -->
                                                         </div>
                                                         <!-- /.col -->
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
-                                                                <h3 class="name"><a href="{{ url('product/detail/'.$product->id ) }}">
+                                                                <h3 class="name"><a
+                                                                        href="{{ url('product/detail/'.$product->id ) }}">
                                                                         {{ $product->product_name_en }} </a></h3>
                                                                 <div class="rating rateit-small"></div>
 
 
                                                                 @if ($product->discount_price == NULL)
-                                                                    <div class="product-price"> <span class="price"> ${{ $product->selling_price }} </span>  </div>
+                                                                    <div class="product-price"><span
+                                                                            class="price"> ${{ $product->selling_price }} </span>
+                                                                    </div>
                                                                 @else
-                                                                    <div class="product-price"> <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
+                                                                    <div class="product-price"><span
+                                                                            class="price"> ${{ $product->discount_price }} </span>
+                                                                        <span
+                                                                            class="price-before-discount">$ {{ $product->selling_price }}</span>
+                                                                    </div>
                                                                 @endif
 
                                                                 <!-- /.product-price -->
                                                                 <div class="description m-t-10">
-                                                                   {{ $product->short_descp_en }} </div>
+                                                                    {{ $product->short_descp_en }} </div>
                                                                 <div class="cart clearfix animate-effect">
                                                                     <div class="action">
                                                                         <ul class="list-unstyled">
                                                                             <li class="add-cart-button btn-group">
-                                                                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                                                                                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                                                <button class="btn btn-primary icon"
+                                                                                        data-toggle="dropdown"
+                                                                                        type="button"><i
+                                                                                        class="fa fa-shopping-cart"></i>
+                                                                                </button>
+                                                                                <button class="btn btn-primary cart-btn"
+                                                                                        type="button">Add to cart
+                                                                                </button>
                                                                             </li>
-                                                                            <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                                            <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                                                            <li class="lnk wishlist"><a
+                                                                                    class="add-to-cart"
+                                                                                    href="detail.html" title="Wishlist">
+                                                                                    <i class="icon fa fa-heart"></i>
+                                                                                </a></li>
+                                                                            <li class="lnk"><a class="add-to-cart"
+                                                                                               href="detail.html"
+                                                                                               title="Compare"> <i
+                                                                                        class="fa fa-signal"></i> </a>
+                                                                            </li>
                                                                         </ul>
                                                                     </div>
                                                                     <!-- /.action -->
@@ -286,7 +325,6 @@
                                                     </div>
 
 
-
                                                     @php
                                                         $amount = $product->selling_price - $product->discount_price;
                                                         $discount = ($amount/$product->selling_price) * 100;
@@ -297,10 +335,10 @@
                                                         @if ($product->discount_price == NULL)
                                                             <div class="tag new"><span>new</span></div>
                                                         @else
-                                                            <div class="tag hot"><span>{{ round($discount) }}%</span></div>
+                                                            <div class="tag hot"><span>{{ round($discount) }}%</span>
+                                                            </div>
                                                         @endif
                                                     </div>
-
 
 
                                                 </div>
@@ -314,12 +352,6 @@
 
 
                                     <!--            //////////////////// Product List View END ////////////// -->
-
-
-
-
-
-
 
 
                                 </div>
@@ -350,19 +382,28 @@
             </div>
             <!-- /.row -->
             <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-           @include('frontend.body.brands')
-            <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> </div>
+            @include('frontend.body.brands')
+            <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+        </div>
         <!-- /.container -->
 
     </div>
     <!-- /.body-content -->
 
+    <script>
+        $(document).ready(function() {
+            $('#sortForm li').on('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior
+                var sortOption = $(this).data('sort');
 
+                // Set the value of the hidden input field in the form
+                $('#sortOptionInput').val(sortOption);
 
-
-
-
-
+                // Submit the form using JavaScript
+                $('#sortForm')[0].submit(); // Note: [0] accesses the DOM element
+            });
+        });
+    </script>
 
 @endsection
 

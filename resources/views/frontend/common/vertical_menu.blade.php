@@ -76,15 +76,17 @@
             <div class="widget-header">
                 <h4 class="widget-title">Price Slider</h4>
             </div>
+            <form method="get" action="{{route('filter.price')}}">
             <div class="sidebar-widget-body m-t-10">
-                <div class="price-range-holder"><span class="min-max"> <span class="pull-left">$200.00</span> <span
-                            class="pull-right">$800.00</span> </span>
-                    <input type="text" id="amount" style="border:0; color:#666666; font-weight:bold;text-align:center;">
-                    <input type="text" class="price-slider" value="">
+                <div class="price-range-holder"><span class="min-max"> <span class="pull-left">$100.00</span> <span
+                            class="pull-right">$1500.00</span> </span>
+                    <input type="text" id="amount" name="min" style="border:0; color:#666666; font-weight:bold;text-align:center;">
+                    <input type="text" class="price-slider" name="max" value="">
                 </div>
                 <!-- /.price-range-holder -->
-                <a href="#" class="lnk btn btn-primary">Filter</a></div>
+                <button type="submit" class="lnk btn btn-primary">Filter</button></div>
             <!-- /.sidebar-widget-body -->
+            </form>
         </div>
         <!-- /.sidebar-widget -->
         <!-- ============================================== PRICE SILDER : END ============================================== -->

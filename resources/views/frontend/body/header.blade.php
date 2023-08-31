@@ -18,7 +18,7 @@
                 </div>
                 <!-- /.logo-holder -->
 
-                <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
+                <div class="col-xs-12 col-sm-12 col-md-5 top-search-holder">
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
@@ -26,9 +26,9 @@
                             @csrf
                             <div class="control-group">
 
-                                <input class="search-field" onfocus="search_result_show()" onblur="search_result_hide()"
+                                <input class="search-field " style="width: 395px" onfocus="search_result_show()" onblur="search_result_hide()"
                                        id="search" name="search" placeholder="Search product..."/>
-                                <button class="search-button" type="submit"></button>
+                                <button class="search-button " type="submit"></button>
                             </div>
                         </form>
                         <div id="searchProducts"></div>
@@ -39,7 +39,7 @@
                 </div>
                 <!-- /.top-search-holder -->
 
-                <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row">
+                <div class="col-xs-12 col-sm-12 col-md-5 animate-dropdown top-cart-row">
 
 
                     <!-- ===== === SHOPPING CART DROPDOWN ===== == -->
@@ -68,6 +68,41 @@
                                 <a class="whislist-counter" href="{{route('get.wishlist')}}">
                                     <div class="whislist-label"></div>
                                 </a>
+                                <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+
+                                    <div class="items-cart-inner">
+                                        <div class="basket">
+                                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                                        </div>
+                                        <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
+                                        <div class="total-price-basket"><span class="lbl">Cart-</span>
+                                            <span class="total-price"> <span class="sign"></span>
+                <span class="value" id="cartSubTotal"></span> </span></div>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <!--   // Mini Cart Start with Ajax -->
+
+                                        <div id="miniCart">
+
+                                        </div>
+
+                                        <!--   // End Mini Cart Start with Ajax -->
+
+
+                                        <div class="clearfix cart-total">
+                                            <div class="pull-right"><span class="text">Sub Total:</span>
+                                                <span class='price' id="cartSubTotal">  </span></div>
+                                            <div class="clearfix"></div>
+                                            <a href="{{route('mycart')}}" class="btn btn-upper btn-primary btn-block m-t-20">View my
+                                                cart</a>
+                                            <a href="{{route('checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+                                        </div>
+                                        <!-- /.cart-total-->
+
+                                    </li>
+                                </ul>
                         </div>
                         @else
                             <div class="topbar-link">
@@ -92,45 +127,46 @@
                             <a class="whislist-counter" href="{{route('get.wishlist')}}">
                                 <div class="whislist-label"></div>
                             </a>
+                            <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+
+                                <div class="items-cart-inner">
+                                    <div class="basket">
+                                        <i class="glyphicon glyphicon-shopping-cart"></i>
+                                    </div>
+                                    <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
+                                    <div class="total-price-basket"><span class="lbl">Cart-</span>
+                                        <span class="total-price"> <span class="sign"></span>
+                <span class="value" id="cartSubTotal"></span> </span></div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <!--   // Mini Cart Start with Ajax -->
+
+                                    <div id="miniCart">
+
+                                    </div>
+
+                                    <!--   // End Mini Cart Start with Ajax -->
+
+
+                                    <div class="clearfix cart-total">
+                                        <div class="pull-right"><span class="text">Sub Total:</span>
+                                            <span class='price' id="cartSubTotal">  </span></div>
+                                        <div class="clearfix"></div>
+                                        <a href="{{route('mycart')}}" class="btn btn-upper btn-primary btn-block m-t-20">View my
+                                            cart</a>
+                                        <a href="{{route('checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
+                                    </div>
+                                    <!-- /.cart-total-->
+
+                                </li>
+                            </ul>
                     </div>
                     @endif
 
 
-                    <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
 
-                        <div class="items-cart-inner">
-                            <div class="basket">
-                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                            </div>
-                            <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
-                            <div class="total-price-basket"><span class="lbl">Cart-</span>
-                                <span class="total-price"> <span class="sign"></span>
-                <span class="value" id="cartSubTotal"></span> </span></div>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <!--   // Mini Cart Start with Ajax -->
-
-                            <div id="miniCart">
-
-                            </div>
-
-                            <!--   // End Mini Cart Start with Ajax -->
-
-
-                            <div class="clearfix cart-total">
-                                <div class="pull-right"><span class="text">Sub Total:</span>
-                                    <span class='price' id="cartSubTotal">  </span></div>
-                                <div class="clearfix"></div>
-                                <a href="{{route('mycart')}}" class="btn btn-upper btn-primary btn-block m-t-20">View my
-                                    cart</a>
-                                <a href="{{route('checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
-                            </div>
-                            <!-- /.cart-total-->
-
-                        </li>
-                    </ul>
                     <!-- /.dropdown-menu-->
                 </div>
                 <!-- /.dropdown-cart -->
@@ -221,7 +257,7 @@
                                     </li>
                                 @endforeach
 
-                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-hover="dropdown"
+                                <li class="dropdown"><a href="{{route('blog.cat',1)}}" class="dropdown-toggle" data-hover="dropdown"
                                                         data-toggle="dropdown">Blog</a>
                                     <ul class="dropdown-menu pages">
                                         <li>
@@ -233,7 +269,7 @@
                                                                 @endphp
                                                         <ul class="links">
                                                             @foreach($blogs as $blog)
-                                                            <li><a href="blog.html">{{$blog->blog_category_name_en}}</a></li>
+                                                            <li><a href="{{route('blog.cat',$blog->id)}}">{{$blog->blog_category_name_en}}</a></li>
                                                             @endforeach
                                                         </ul>
                                                     </div>

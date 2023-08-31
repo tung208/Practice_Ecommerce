@@ -488,18 +488,18 @@
                                             <div class="item">
                                                 <div class="blog-post">
                                                     <div class="blog-post-image">
-                                                        <div class="image"><a href="blog.html"><img
+                                                        <div class="image"><a href="{{route('post.details',$blog->id)}}"><img
                                                                     src="{{asset($blog-> post_image)}}" alt=""></a>
                                                         </div>
                                                     </div>
                                                     <!-- /.blog-post-image -->
 
                                                     <div class="blog-post-info text-left">
-                                                        <h3 class="name"><a href="#">{{$blog-> post_title_en}}</a></h3>
+                                                        <h3 class="name"><a href="{{route('post.details',$blog->id)}}">{{$blog-> post_title_en}}</a></h3>
                                                         <span
                                                             class="info">&nbsp; {{date("F j, Y, g:i a",strtotime($blog -> updated_at))}} </span>
                                                         <p class="text">{!! Str::limit($blog-> post_details_en,100)!!}</p>
-                                                        <a href="#" class="lnk btn btn-primary">Read more</a></div>
+                                                        <a href="{{route('post.details',$blog->id)}}" class="lnk btn btn-primary">Read more</a></div>
                                                     <!-- /.blog-post-info -->
 
                                                 </div>

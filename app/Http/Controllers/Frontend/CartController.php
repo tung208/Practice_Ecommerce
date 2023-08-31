@@ -51,7 +51,7 @@ class CartController extends Controller
             'message' => 'Remove Product From Wishlist Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->route('get.wishlist')->with($notification);
     }
 
     public function AddToCart(Request $request, $id)

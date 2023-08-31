@@ -71,9 +71,13 @@
 
 
                                         <td width="30%">
-                                            <a href="{{ route('add.toCart',$item->id) }}" class="btn btn-primary"
-                                               title="Product Details Data"><i class="fa fa-cart-plus"></i> </a>
-                                            <a href="{{ route('edit.product',$item->id) }}" class="btn btn-primary"
+                                            <button class="btn btn-primary icon" type="button"
+                                                    title="Add To Cart" data-toggle="modal"
+                                                    data-target="#exampleModal"
+                                                    id="{{ $item->product->id }}"
+                                                    onclick="productView(this.id)"><i
+                                                    class="fa fa-shopping-cart"></i></button>
+                                            <a href="{{ route('product.detail',$item->product->id) }}" class="btn btn-primary"
                                                title="Product Details Data"><i class="fa fa-eye"></i> </a>
                                             <a href="{{ route('remove.wishlist',$item->id) }}" class="btn btn-danger"
                                                title="Delete Data" id="delete">

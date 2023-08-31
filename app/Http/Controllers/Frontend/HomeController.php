@@ -141,4 +141,27 @@ class HomeController extends Controller
         $products = Product::where('product_name_en', 'LIKE', "%$item%")->select('product_name_en', 'product_thumbnail', 'id', 'product_slug_en')->limit(5)->get();
         return view('frontend.product.search_product', compact('products'));
     }
+    public function PriceFilter(Request $request){
+        $min = $request-> min;
+        $max= $request -> max;
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        $products = Product::whereBetween('selling_price', [$min, $max])-> orderBy('selling_price','ASC')-> get();
+        return view('frontend.product.search', compact('products', 'categories'));
+    }
+    public function filterProducts(Request $request) {
+        $sortBy = $request->input('sort_by');
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        if ($sortBy == 'price_lowest') {
+            $products = Product::orderBy('selling_price', 'asc')->get();
+        } elseif ($sortBy == 'price_highest') {
+            $products = Product::orderBy('selling_price', 'desc')->get();
+        } elseif ($sortBy == 'name_a_to_z') {
+            $products = Product::orderBy('product_name_en', 'asc')->get();
+        } else {
+            $products = Product::all();
+        }
+
+
+        return view('frontend.product.search', compact('products', 'categories'));
+    }
 }
