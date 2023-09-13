@@ -302,7 +302,7 @@ Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement
 Route::post('/search', [HomeController::class, 'ProductSearch'])->name('product.search');
 
 Route::get('/filer-price', [HomeController::class, 'PriceFilter'])->name('filter.price');
-Route::get('/filter-products', [HomeController::class,'filterProducts'])->name('filter.products');
+Route::get('/filter-products/{option}', [HomeController::class,'filterProducts'])->name('filter.products');
 
 // Advance Search Routes
 Route::post('search-product', [HomeController::class, 'SearchProduct']);
@@ -314,6 +314,11 @@ Route::get('/blog', [UserBlogController::class, 'AddBlogPost'])->name('home.blog
 Route::get('/post/details/{id}', [UserBlogController::class, 'DetailsBlogPost'])->name('post.details');
 
 Route::get('/blog/category/post/{category_id}', [UserBlogController::class, 'HomeBlogCatPost'])-> name('blog.cat');
+
+// Frontend Product Tags Page
+Route::get('/product/tag/{tag}', [HomeController::class, 'TagWiseProduct']);
+Route::get('/product/size/{size}', [HomeController::class, 'SizeWiseProduct'])->name('product.size');
+Route::get('/product/color/{color}', [HomeController::class, 'ColorWiseProduct'])->name('product.color');
 
 
 

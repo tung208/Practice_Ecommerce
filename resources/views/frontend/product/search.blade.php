@@ -71,56 +71,26 @@
 
                             <div class="col col-sm-12 col-md-6">
                                 <div class="col col-sm-3 col-md-6 no-padding">
-                                    <form id="sortForm" method="get" action="{{route('filter.products')}}">
+
                                     <div class="lbl-cnt"><span class="lbl">Sort by</span>
                                         <div class="fld inline">
                                             <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                                                 <button data-toggle="dropdown" type="button"
                                                         class="btn dropdown-toggle"> Position <span
                                                         class="caret"></span></button>
-                                                <ul role="menu" class="dropdown-menu" >
-                                                    <li role="presentation" data-sort="price_lowest"><a href="#">Price:Lowest
-                                                            first</a></li>
-                                                    <li role="presentation" data-sort="price_highest"><a href="#">Price:Highest
-                                                            first</a></li>
-                                                    <li role="presentation" data-sort="name_a_to_z"><a href="#">Product
-                                                            Name:A to Z</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="sort_by" id="sortOptionInput" value="">
-                                        <!-- /.fld -->
-                                    </div>
-                                    </form>
-                                    <!-- /.lbl-cnt -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col col-sm-3 col-md-6 no-padding">
-                                    <div class="lbl-cnt"><span class="lbl">Show</span>
-                                        <div class="fld inline">
-                                            <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                                <button data-toggle="dropdown" type="button"
-                                                        class="btn dropdown-toggle"> 1 <span class="caret"></span>
-                                                </button>
                                                 <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">1</a></li>
-                                                    <li role="presentation"><a href="#">2</a></li>
-                                                    <li role="presentation"><a href="#">3</a></li>
-                                                    <li role="presentation"><a href="#">4</a></li>
-                                                    <li role="presentation"><a href="#">5</a></li>
-                                                    <li role="presentation"><a href="#">6</a></li>
-                                                    <li role="presentation"><a href="#">7</a></li>
-                                                    <li role="presentation"><a href="#">8</a></li>
-                                                    <li role="presentation"><a href="#">9</a></li>
-                                                    <li role="presentation"><a href="#">10</a></li>
+                                                    <li role="presentation"><a href="{{route('filter.products','price_lowest')}}" data-sort="price_lowest">Price: Lowest first</a></li>
+                                                    <li role="presentation"><a href="{{route('filter.products','price_highest')}}" data-sort="price_highest">Price: Highest first</a></li>
+                                                    <li role="presentation"><a href="{{route('filter.products','name_a_to_z')}}" data-sort="name_a_to_z">Product Name: A to Z</a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <!-- /.fld -->
                                     </div>
+
                                     <!-- /.lbl-cnt -->
                                 </div>
-                                <!-- /.col -->
+
                             </div>
                             <!-- /.col -->
                             <div class="col col-sm-6 col-md-4 text-right">
@@ -215,10 +185,7 @@
                                                                                                 href="detail.html"
                                                                                                 title="Wishlist"> <i
                                                                                 class="icon fa fa-heart"></i> </a></li>
-                                                                    <li class="lnk"><a class="add-to-cart"
-                                                                                       href="detail.html"
-                                                                                       title="Compare"> <i
-                                                                                class="fa fa-signal"></i> </a></li>
+
                                                                 </ul>
                                                             </div>
                                                             <!-- /.action -->
@@ -307,11 +274,7 @@
                                                                                     href="detail.html" title="Wishlist">
                                                                                     <i class="icon fa fa-heart"></i>
                                                                                 </a></li>
-                                                                            <li class="lnk"><a class="add-to-cart"
-                                                                                               href="detail.html"
-                                                                                               title="Compare"> <i
-                                                                                        class="fa fa-signal"></i> </a>
-                                                                            </li>
+
                                                                         </ul>
                                                                     </div>
                                                                     <!-- /.action -->
@@ -390,20 +353,20 @@
     </div>
     <!-- /.body-content -->
 
-    <script>
-        $(document).ready(function() {
-            $('#sortForm li').on('click', function(e) {
-                e.preventDefault(); // Prevent default link behavior
-                var sortOption = $(this).data('sort');
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            $('#sortForm li').on('click', function(e) {--}}
+{{--                e.preventDefault(); // Prevent default link behavior--}}
+{{--                var sortOption = $(this).data('sort');--}}
 
-                // Set the value of the hidden input field in the form
-                $('#sortOptionInput').val(sortOption);
+{{--                // Set the value of the hidden input field in the form--}}
+{{--                $('#sortOptionInput').val(sortOption);--}}
 
-                // Submit the form using JavaScript
-                $('#sortForm')[0].submit(); // Note: [0] accesses the DOM element
-            });
-        });
-    </script>
+{{--                // Submit the form using JavaScript--}}
+{{--                $('#sortForm')[0].submit(); // Note: [0] accesses the DOM element--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
 
 @endsection
 

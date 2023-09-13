@@ -51,7 +51,7 @@ class HomeController extends Controller
         return Redirect()->route('login');
     }
     public function AllProduct(Request $request){
-        $products = Product::where('status', 1)->paginate(3);
+        $products = Product::where('status', 1)->paginate(6);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
 
@@ -113,12 +113,21 @@ class HomeController extends Controller
 
     }
 
-    public function SubSubCatWiseProduct($subsubcat_id)
+    public function SubSubCatWiseProduct(Request $request,$subsubcat_id)
     {
         $products = Product::where('status', 1)->where('subsubcategory_id', $subsubcat_id)->orderBy('id', 'DESC')->paginate(6);
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
         $breadsubsubcat = SubSubCategory::with(['category', 'subcategory'])->where('id', $subsubcat_id)->get();
+        ///  Load More Product with Ajax
+        if ($request->ajax()) {
+            $grid_view = view('frontend.product.grid_view_product', compact('products'))->render();
+
+            $list_view = view('frontend.product.list_view_product', compact('products'))->render();
+            return response()->json(['grid_view' => $grid_view, 'list_view', $list_view]);
+
+        }
+        ///  End Load More Product with Ajax
 
         return view('frontend.product.sub_subcategory_view', compact('products', 'categories', 'breadsubsubcat'));
 
@@ -142,26 +151,57 @@ class HomeController extends Controller
         return view('frontend.product.search_product', compact('products'));
     }
     public function PriceFilter(Request $request){
-        $min = $request-> min;
-        $max= $request -> max;
+        $max = $request->input('max', 1500);
+        $price= explode(',',$max);
+        $minPrice =(int) $price[0];
+        $maxPrice =(int) $price[1];
+
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
-        $products = Product::whereBetween('selling_price', [$min, $max])-> orderBy('selling_price','ASC')-> get();
-        return view('frontend.product.search', compact('products', 'categories'));
+        $products = Product::whereBetween('selling_price', [$minPrice,$maxPrice])-> orderBy('selling_price','ASC')-> paginate(6);
+        return view('frontend.product.tags_view', compact('products', 'categories'));
     }
-    public function filterProducts(Request $request) {
-        $sortBy = $request->input('sort_by');
+    public function filterProducts($option) {
+
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
-        if ($sortBy == 'price_lowest') {
-            $products = Product::orderBy('selling_price', 'asc')->get();
-        } elseif ($sortBy == 'price_highest') {
-            $products = Product::orderBy('selling_price', 'desc')->get();
-        } elseif ($sortBy == 'name_a_to_z') {
-            $products = Product::orderBy('product_name_en', 'asc')->get();
-        } else {
-            $products = Product::all();
+        $products =  Product::all();
+        if ($option === 'price_lowest') {
+            $products = $products->orderBy('selling_price', 'asc')->paginate(6);
+        }
+        if ($option === 'price_highest') {
+            $products = Product::orderBy('selling_price', 'desc')->paginate(6);
+        }
+        if ($option === 'name_a_to_z') {
+            $products = $products->orderBy('product_name_en', 'asc')->paginate(6);
         }
 
+        return view('frontend.product.tags_view', compact('products', 'categories'));
+    }
 
-        return view('frontend.product.search', compact('products', 'categories'));
+    public function TagWiseProduct($tag){
+        $products = Product::where('status',1)->where('product_tags_en',$tag)->orderBy('id','DESC')->paginate(6);
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        return view('frontend.product.tags_view',compact('products','categories'));
+
+    }
+    public function SizeWiseProduct(Request $request,$size){
+        $sortBy = $request->input('sort_by');
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        if ($sortBy == 'price_lowest') {
+            $products = Product::where('status',1)->where('product_size_en','LIKE',"%$size%")->orderBy('selling_price', 'asc')->paginate(6);
+        } else if($sortBy == 'price_highest') {
+            $products = Product::where('status',1)->where('product_size_en','LIKE',"%$size%")->orderBy('selling_price', 'desc')->paginate(6);
+        } else if ($sortBy == 'name_a_to_z') {
+            $products = Product::where('status',1)->where('product_size_en','LIKE',"%$size%")->orderBy('product_name_en', 'asc')->paginate(6);
+        } else {
+            $products = Product::where('status',1)->where('product_size_en','LIKE',"%$size%")->orderBy('id','DESC')->paginate(6);
+        }
+        return view('frontend.product.tags_view',compact('products','categories'));
+
+    }
+    public function ColorWiseProduct($color){
+        $products = Product::where('status',1)->where('product_color_en','LIKE',"%$color%")->orderBy('id','DESC')->paginate(6);
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        return view('frontend.product.tags_view',compact('products','categories'));
+
     }
 }

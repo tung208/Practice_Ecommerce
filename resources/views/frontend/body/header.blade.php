@@ -197,8 +197,7 @@
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
-                                <li class="active dropdown yamm-fw"><a href="{{url('/')}}" data-hover="dropdown"
-                                                                       class="dropdown-toggle" data-toggle="dropdown">Home</a>
+                                <li class="active dropdown yamm-fw"><a href="{{url('/')}}">Home</a>
                                 </li>
                                 @php
 
@@ -216,9 +215,9 @@
                                     @php
                                         $category = \App\Models\Category::findOrFail($cat-> category_id);
                                     @endphp
-                                    <li class="dropdown yamm mega-menu"><a href="{{route('list.product',$category->id)}}" data-hover="dropdown"
+                                    <li class="dropdown yamm mega-menu"><a href="{{route('list.product',$category->id)}}"
                                                                            class="dropdown-toggle"
-                                                                           data-toggle="dropdown">{{$category-> category_name_en}}</a>
+                                                                          >{{$category-> category_name_en}}</a>
                                         <ul class="dropdown-menu container">
                                             <li>
                                                 <div class="yamm-content ">

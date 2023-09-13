@@ -4,11 +4,33 @@
         Sub - Subcategory Product
     @endsection
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <ul class="list-inline list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    @foreach($breadsubsubcat as $item)
+                        <li class='active'>{{ $item->category->category_name_en }}</li>
+                    @endforeach
 
+                    @foreach($breadsubsubcat as $item)
+                        <li class='active'>{{ $item->subcategory->subcategory_name_en }}</li>
+                    @endforeach
 
+                    @foreach($breadsubsubcat as $item)
+                        <li class='active'>{{ $item->subsubcategory_name_en }}</li>
+                    @endforeach
+
+                </ul>
+            </div>
+            <!-- /.breadcrumb-inner -->
+        </div>
+        <!-- /.container -->
+    </div>
     <!-- /.breadcrumb -->
     <div class="body-content outer-top-xs">
         <div class='container'>
@@ -19,16 +41,11 @@
                     @include('frontend.common.vertical_menu')
                     <!-- = ==== TOP NAVIGATION : END === ===== -->
 
+
                     <div class="sidebar-module-container">
                         <div class="sidebar-filter">
-                            <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
 
 
-
-                            <!-- == ====== PRODUCT TAGS ==== ======= -->
-                            @include('frontend.common.product_tags')
-                            <!-- /.sidebar-widget -->
-                            <!-- == ====== END PRODUCT TAGS ==== ======= -->
 
 
                         </div>
@@ -38,6 +55,9 @@
                 </div>
                 <!-- /.sidebar -->
                 <div class='col-md-9'>
+
+
+                    <!-- == ==== SECTION – HERO === ====== -->
 
 
                     @foreach($breadsubsubcat as $item)
@@ -95,31 +115,31 @@
                                     <!-- /.lbl-cnt -->
                                 </div>
                                 <!-- /.col -->
-                                <div class="col col-sm-3 col-md-6 no-padding">
-                                    <div class="lbl-cnt"><span class="lbl">Show</span>
-                                        <div class="fld inline">
-                                            <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                                <button data-toggle="dropdown" type="button"
-                                                        class="btn dropdown-toggle"> 1 <span class="caret"></span>
-                                                </button>
-                                                <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">1</a></li>
-                                                    <li role="presentation"><a href="#">2</a></li>
-                                                    <li role="presentation"><a href="#">3</a></li>
-                                                    <li role="presentation"><a href="#">4</a></li>
-                                                    <li role="presentation"><a href="#">5</a></li>
-                                                    <li role="presentation"><a href="#">6</a></li>
-                                                    <li role="presentation"><a href="#">7</a></li>
-                                                    <li role="presentation"><a href="#">8</a></li>
-                                                    <li role="presentation"><a href="#">9</a></li>
-                                                    <li role="presentation"><a href="#">10</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <!-- /.fld -->
-                                    </div>
-                                    <!-- /.lbl-cnt -->
-                                </div>
+{{--                                <div class="col col-sm-3 col-md-6 no-padding">--}}
+{{--                                    <div class="lbl-cnt"><span class="lbl">Show</span>--}}
+{{--                                        <div class="fld inline">--}}
+{{--                                            <div class="dropdown dropdown-small dropdown-med dropdown-white inline">--}}
+{{--                                                <button data-toggle="dropdown" type="button"--}}
+{{--                                                        class="btn dropdown-toggle"> 1 <span class="caret"></span>--}}
+{{--                                                </button>--}}
+{{--                                                <ul role="menu" class="dropdown-menu">--}}
+{{--                                                    <li role="presentation"><a href="#">1</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">2</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">3</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">4</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">5</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">6</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">7</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">8</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">9</a></li>--}}
+{{--                                                    <li role="presentation"><a href="#">10</a></li>--}}
+{{--                                                </ul>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <!-- /.fld -->--}}
+{{--                                    </div>--}}
+{{--                                    <!-- /.lbl-cnt -->--}}
+{{--                                </div>--}}
                                 <!-- /.col -->
                             </div>
                             <!-- /.col -->
@@ -148,7 +168,7 @@
                                                         <div class="product-image">
                                                             <div class="image"><a
                                                                     href="{{ url('product/detail/'.$product->id ) }}"><img
-                                                                        src="{{asset($product->product_thumbnail)}}"
+                                                                        src="{{ asset($product->product_thumbnail) }}"
                                                                         alt=""></a></div>
                                                             <!-- /.image -->
 
@@ -204,21 +224,21 @@
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
                                                                         <button class="btn btn-primary icon"
-                                                                                data-toggle="dropdown" type="button"><i
+                                                                                type="button"
+                                                                                title="Add Cart" data-toggle="modal"
+                                                                                data-target="#exampleModal"
+                                                                                id="{{ $product->id }}"
+                                                                                onclick="productView(this.id)"><i
                                                                                 class="fa fa-shopping-cart"></i>
                                                                         </button>
-                                                                        <button class="btn btn-primary cart-btn"
-                                                                                type="button">Add to cart
-                                                                        </button>
+
                                                                     </li>
-                                                                    <li class="lnk wishlist"><a class="add-to-cart"
-                                                                                                href="detail.html"
-                                                                                                title="Wishlist"> <i
-                                                                                class="icon fa fa-heart"></i> </a></li>
-                                                                    <li class="lnk"><a class="add-to-cart"
-                                                                                       href="detail.html"
-                                                                                       title="Compare"> <i
-                                                                                class="fa fa-signal"></i> </a></li>
+                                                                    <button class="btn btn-primary icon" type="button"
+                                                                            title="Wishlist" id="{{ $product->id }}"
+                                                                            onclick="addToWishList(this.id)"><i
+                                                                            class="fa fa-heart"></i></button>
+
+
                                                                 </ul>
                                                             </div>
                                                             <!-- /.action -->
@@ -269,10 +289,8 @@
                                                         <div class="col col-sm-8 col-lg-8">
                                                             <div class="product-info">
                                                                 <h3 class="name"><a
-                                                                        href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
-
-                                                                        {{ $product->product_name_en }}
-                                                                    </a></h3>
+                                                                        href="{{ url('product/detail/'.$product->id ) }}">
+                                                                        {{ $product->product_name_en }} </a></h3>
                                                                 <div class="rating rateit-small"></div>
 
 
@@ -290,36 +308,35 @@
 
                                                                 <!-- /.product-price -->
                                                                 <div class="description m-t-10">
+                                                                    {{ $product->short_descp_en }} </div>
+                                                                <div class="cart clearfix animate-effect">
+                                                                    <div class="action">
+                                                                        <ul class="list-unstyled">
+                                                                            <li class="add-cart-button btn-group">
+                                                                                <button class="btn btn-primary icon"
+                                                                                        type="button"
+                                                                                        title="Add Cart"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#exampleModal"
+                                                                                        id="{{ $product->id }}"
+                                                                                        onclick="productView(this.id)">
+                                                                                    <i
+                                                                                        class="fa fa-shopping-cart"></i>
+                                                                                </button>
 
-                                                                        {{ $product->short_descp_en }}
+                                                                            </li>
+                                                                            <button class="btn btn-primary icon"
+                                                                                    type="button"
+                                                                                    title="Wishlist"
+                                                                                    id="{{ $product->id }}"
+                                                                                    onclick="addToWishList(this.id)"><i
+                                                                                    class="fa fa-heart"></i></button>
 
-                                                                    <div class="cart clearfix animate-effect">
-                                                                        <div class="action">
-                                                                            <ul class="list-unstyled">
-                                                                                <li class="add-cart-button btn-group">
-                                                                                    <button class="btn btn-primary icon" type="button"
-                                                                                            title="Add Cart" data-toggle="modal"
-                                                                                            data-target="#exampleModal"
-                                                                                            id="{{ $product->id }}"
-                                                                                            onclick="productView(this.id)"><i
-                                                                                            class="fa fa-shopping-cart"></i></button>
 
-                                                                                </li>
-                                                                                <button class="btn btn-primary icon" type="button"
-                                                                                        title="Wishlist" id="{{ $product->id }}"
-                                                                                        onclick="addToWishList(this.id)"><i
-                                                                                        class="fa fa-heart"></i></button>
-
-                                                                                <li class="lnk"><a class="add-to-cart"
-                                                                                                   href="detail.html"
-                                                                                                   title="Compare"> <i
-                                                                                            class="fa fa-signal"
-                                                                                            aria-hidden="true"></i> </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <!-- /.action -->
+                                                                        </ul>
                                                                     </div>
+                                                                    <!-- /.action -->
+                                                                </div>
                                                                 <!-- /.cart -->
 
                                                             </div>
@@ -385,7 +402,9 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
-                @include('frontend.body.brands')
+
+            <!-- /.logo-slider -->
+            <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
         </div>
         <!-- /.container -->
 

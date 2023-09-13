@@ -78,9 +78,9 @@
             </div>
             <form method="get" action="{{route('filter.price')}}">
             <div class="sidebar-widget-body m-t-10">
-                <div class="price-range-holder"><span class="min-max"> <span class="pull-left">$100.00</span> <span
-                            class="pull-right">$1500.00</span> </span>
-                    <input type="text" id="amount" name="min" style="border:0; color:#666666; font-weight:bold;text-align:center;">
+                <div class="price-range-holder"><span class="min-max"> <span class="pull-left">$100</span> <span
+                            class="pull-right">$700.00</span> </span>
+                    <input  type="text" id="amount" name="min" style="border:0; color:#666666; font-weight:bold;text-align:center;">
                     <input type="text" class="price-slider" name="max" value="">
                 </div>
                 <!-- /.price-range-holder -->
@@ -97,9 +97,9 @@
             </div>
             <div class="sidebar-widget-body">
                 <ul class="list">
-                    <li><a href="#">Small</a></li>
-                    <li><a href="#">Medium</a></li>
-                    <li><a href="#">Large</a></li>
+                    <li><a href="{{route('product.size','Small')}}">Small</a></li>
+                    <li><a href="{{route('product.size','Medium')}}">Medium</a></li>
+                    <li><a href="{{route('product.size','Large')}}">Large</a></li>
 
                 </ul>
                 <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
@@ -115,31 +115,19 @@
             </div>
             <div class="sidebar-widget-body">
                 <ul class="list">
-                    <li><a href="#">Red</a></li>
-                    <li><a href="#">Blue</a></li>
-                    <li><a href="#">Yellow</a></li>
-                    <li><a href="#">Pink</a></li>
-                    <li><a href="#">Brown</a></li>
-                    <li><a href="#">Teal</a></li>
+                    <li><a href="{{route('product.color','Red')}}">Red</a></li>
+                    <li><a href="{{route('product.color','Blue')}}">Blue</a></li>
+                    <li><a href="{{route('product.color','Yellow')}}">Yellow</a></li>
+                    <li><a href="{{route('product.color','Pink')}}">Pink</a></li>
+                    <li><a href="{{route('product.color','Brown')}}">Brown</a></li>
+                    <li><a href="{{route('product.color','Teal')}}">Teal</a></li>
                 </ul>
             </div>
             <!-- /.sidebar-widget-body -->
         </div>
         <!-- /.sidebar-widget -->
         <!-- ============================================== COLOR: END ============================================== -->
-        <!-- ============================================== COMPARE============================================== -->
-        <div class="sidebar-widget wow fadeInUp outer-top-vs">
-            <h3 class="section-title">Compare products</h3>
-            <div class="sidebar-widget-body">
-                <div class="compare-report">
-                    <p>You have no <span>item(s)</span> to compare</p>
-                </div>
-                <!-- /.compare-report -->
-            </div>
-            <!-- /.sidebar-widget-body -->
-        </div>
-        <!-- /.sidebar-widget -->
-        <!-- ============================================== COMPARE: END ============================================== -->
+      @include('frontend.common.product_tags')
 
 
 

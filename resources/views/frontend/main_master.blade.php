@@ -182,7 +182,7 @@
                                 <li class="list-group-item">Product Price: <strong class="text-danger">$<span
                                             id="pprice"></span></strong>
                                     <del id="oldprice">$</del>
-                                </li>
+                                 </li>
                                 <li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
                                 <li class="list-group-item">Category: <strong id="pcategory"></strong></li>
                                 <li class="list-group-item">Brand: <strong id="pbrand"></strong></li>
@@ -468,7 +468,7 @@
                 var rows = ""
                 $.each(response.carts, function (key, value) {
                     rows += `<tr>
-        <td class="col-md-2"><img src="/${value.options.image} " alt="imga" style="width:60px; height:60px;"></td>
+        <td class="col-md-2"><img src="/${value.options.image} " alt="image" style="width:60px; height:60px;"></td>
 
         <td class="col-md-2">
             <div class="product-name"><a href="#">${value.name}</a></div>

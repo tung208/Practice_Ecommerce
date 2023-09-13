@@ -6,7 +6,6 @@
     <div class="container-full">
         <!-- Content Header (Page header) -->
 
-
         <!-- Main content -->
         <section class="content">
 
@@ -26,8 +25,6 @@
 
                                 <div class="row">
                                     <div class="col-12">
-
-
                                         <div class="row"> <!-- start 1st row  -->
                                             <div class="col-md-4">
 

@@ -129,9 +129,6 @@
 
                                             </div> <!-- end col md 4 -->
 
-
-
-
                                         </div> <!-- end 2nd row  -->
 
 
@@ -183,10 +180,6 @@
                                         </div> <!-- end 3RD row  -->
 
 
-
-
-
-
                                         <div class="row"> <!-- start 4th row  -->
 
                                             <div class="col-md-4">
@@ -203,12 +196,7 @@
 
                                             </div> <!-- end col md 4 -->
 
-
-
-
                                         </div> <!-- end 4th row  -->
-
-
 
                                         <div class="row"> <!-- start 5th row  -->
                                             <div class="col-md-6">
@@ -225,16 +213,9 @@
 
                                             </div> <!-- end col md 6 -->
 
-
-
                                         </div> <!-- end 5th row  -->
 
-
-
-
                                         <div class="row"> <!-- start 6th row  -->
-
-
 
                                             <div class="col-md-6">
 
@@ -268,10 +249,6 @@
 
                                         </div> <!-- end 6th row  -->
 
-
-
-
-
                                         <div class="row"> <!-- start 7th row  -->
                                             <div class="col-md-6">
 
@@ -289,9 +266,6 @@
 
 
                                         </div> <!-- end 7th row  -->
-
-
-
 
 
                                         <div class="row"> <!-- start 8th row  -->
@@ -371,9 +345,6 @@
         </section>
         <!-- /.content -->
 
-
-
-
         <section class="content">
             <div class="row">
 
@@ -417,13 +388,7 @@
                             </div>
                             <br><br>
 
-
-
                         </form>
-
-
-
-
 
                     </div>
                 </div>
@@ -472,7 +437,6 @@
 
                                 </div><!--  end col md 3		 -->
 
-
                             </div>
 
                             <div class="text-xs-right">
@@ -480,13 +444,7 @@
                             </div>
                             <br><br>
 
-
-
                         </form>
-
-
-
-
 
                     </div>
                 </div>
@@ -496,15 +454,6 @@
             </div> <!-- // end row  -->
 
         </section>
-
-
-
-
-
-
-
-
-
 
     </div>
 
